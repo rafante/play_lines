@@ -1,1 +1,14 @@
-Alterei o arquivo de teste
+Setup do projeto
+Baixe o Git - Controlador de versão
+https://git-scm.com/
+Baixe e instale o Tortoise Git - Cliente para o Git
+https://tortoisegit.org/
+Baixe e instale o JDK - Java Development Kit - Kit de desenvolvimento Java
+http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
+Baixe e instale o Android Studio
+https://developer.android.com/studio/install?hl=pt-br
+Abra o Android Studio e instale o AndroidSDK
+Baixe e instale o Unity
+https://unity3d.com/pt/
+Github - Clonar o projeto
+https://github.com/rafante/play_lines
