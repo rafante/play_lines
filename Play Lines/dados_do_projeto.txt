@@ -12,3 +12,7 @@ Baixe e instale o Unity
 https://unity3d.com/pt/
 Github - Clonar o projeto
 https://github.com/rafante/play_lines
+
+VLOG do projeto:
+video 1 - https://www.youtube.com/watch?v=s1JJID5N2Zk
+Video 2 - https://www.youtube.com/watch?v=J-AlzH6yg70
