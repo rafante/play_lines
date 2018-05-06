@@ -51,8 +51,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\ControladorCamera.cs" />
      <Compile Include="Assets\Scripts\ControladorCenas.cs" />
-     <Compile Include="Assets\Scripts\UI\BalaoCena.cs" />
+     <Compile Include="Assets\Scripts\UI\BalaoTrecho.cs" />
+     <Compile Include="Assets\Scripts\UI\LayoutHistoria.cs" />
+     <Compile Include="Assets\Scripts\UI\NewCamera.cs" />
+     <Compile Include="Assets\Scripts\UI\TipoBalaoTrecho.cs" />
      <Compile Include="Assets\UIGraph\Scripts\Connection.cs" />
      <Compile Include="Assets\UIGraph\Scripts\ConnectionManager.cs" />
      <Compile Include="Assets\UIGraph\Scripts\ConnectionPoint.cs" />
