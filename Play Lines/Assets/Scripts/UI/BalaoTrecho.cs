@@ -12,6 +12,32 @@ public class BalaoTrecho : MonoBehaviour, IDragHandler, IEndDragHandler {
     public Toggle toggle;
 	public TipoBalaoTrecho tipo;
 	public LayoutHistoria layoutHistoria;
+	public GameObject grupoBotoes;
+	public Text resumo;
+	public InputField resumoEditavel;
+	public bool editavel;
+
+	public Button novo, delete, decisao, conectar;
+
+	// Use this for initialization
+	void Awake () {
+		retangulo = GetComponent<RectTransform>();
+		toggle = GetComponent<Toggle>();
+		layoutHistoria = GameObject.FindObjectOfType<LayoutHistoria> ();
+
+		novo.onClick.AddListener (delegate {
+			layoutHistoria.criarBalaoTrecho();	
+		});
+
+		conectar.onClick.AddListener (delegate {
+			layoutHistoria.criaConexao();	
+		});
+
+		var esteBalao = this;
+		decisao.onClick.AddListener (delegate {
+			esteBalao.alternarEditavel();
+		});
+	}
 
     /// <summary>
     /// Este evendo OnDrag acontece enquanto o jogador estiver tentando arrastar o componente
@@ -20,9 +46,6 @@ public class BalaoTrecho : MonoBehaviour, IDragHandler, IEndDragHandler {
     /// <param name="dadosDoEvento">Este parâmetro traz informações do toque ou clique do mouse</param>
     public void OnDrag(PointerEventData dadosDoEvento)
     {
-		if (Input.touchCount > 0 && Input.GetTouch (0).phase == TouchPhase.Stationary) {
-			
-		}
 		ControladorCamera.ativo = false;
 		var dadosDoPonteiro = dadosDoEvento;
 		if (dadosDoPonteiro == null) {
@@ -42,21 +65,21 @@ public class BalaoTrecho : MonoBehaviour, IDragHandler, IEndDragHandler {
 		ControladorCamera.ativo = true;
 	}
 
-    // Use this for initialization
-    void Awake () {
-		retangulo = GetComponent<RectTransform>();
-        toggle = GetComponent<Toggle>();
-		layoutHistoria = GameObject.FindObjectOfType<LayoutHistoria> ();
-
-		//toggle.OnSelect = onSelct;
+	public void selecionar(){
+		layoutHistoria.selecionar (this);
+		alternarEditavel ();
 	}
 
-	public void aoSelecionar(){
-		if (toggle.isOn) {
-			layoutHistoria.selecionar (this);
-		} else {
-			layoutHistoria.deSelecionar (this);
-		}
+	public void alternarEditavel(){
+		if (toggle.isOn)
+			editavel = !editavel;
+		else
+			editavel = false;
+		var texto = editavel ? resumo.text : resumoEditavel.text;
+		resumoEditavel.text = texto;
+		resumo.text = texto;
+		resumo.gameObject.SetActive (!editavel);
+		resumoEditavel.gameObject.SetActive (editavel);
 	}
 	
 	// Update is called once per frame

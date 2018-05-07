@@ -66,9 +66,26 @@ public class Connection : MonoBehaviour {
 	void Update() {
 		if (isValid) {
 			if (target[0].hasChanged || target[1].hasChanged) {
+				CorrectPosition ();
 				UpdateCurve();
 			}
 		}
+	}
+
+	void CorrectPosition(){
+		var target1 = target [0];
+		var target2 = target [1];
+		var point1 = points [0];
+		var point2 = points [1];
+
+		if (target2.position.x > point1.p.x)
+			point2.direction = ConnectionPoint.ConnectionDirection.East;
+		if (target2.position.x < point1.p.x)
+			point2.direction = ConnectionPoint.ConnectionDirection.West;
+		if (target2.position.y > point1.c.y)
+			point2.direction = ConnectionPoint.ConnectionDirection.North;
+		if (target2.position.y < point1.c.y)
+			point2.direction = ConnectionPoint.ConnectionDirection.South;
 	}
 
 	void OrganizeTransforms() {

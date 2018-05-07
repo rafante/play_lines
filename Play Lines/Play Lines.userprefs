@@ -1,9 +1,9 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj" RefactoringSettings.EnableRefactorings="True">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\CameraControl.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\UI\BalaoTrecho.cs">
     <Files>
-      <File FileName="Assets\Scripts\ControladorCenas.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\CameraControl.cs" Line="25" Column="28" />
+      <File FileName="Assets\Scripts\UI\BalaoTrecho.cs" Line="70" Column="23" />
+      <File FileName="Assets\Scripts\UI\LayoutHistoria.cs" Line="130" Column="4" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
