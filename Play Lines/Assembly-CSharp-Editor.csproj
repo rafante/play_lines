@@ -51,16 +51,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Modern UI Pack\Editor\ModernUI.cs" />
      <Compile Include="Assets\UIGraph\Editor\ConnectionEditor.cs" />
      <Compile Include="Assets\UIGraph\Editor\ConnectionManagerEditor.cs" />
      <Compile Include="Assets\UIGraph\Editor\ConnectionPointDrawer.cs" />
      <Compile Include="Assets\UIGraph\Editor\GraphNodeEditor.cs" />
      <Compile Include="Assets\UIGraph\Editor\UIGraphUtilities.cs" />
- <Reference Include="Unity.PackageManagerUI.Editor">
- <HintPath>C:/dev/unity/play_lines/Play Lines/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
- </Reference>
  <Reference Include="UnityEditor.StandardEvents">
  <HintPath>C:/dev/unity/play_lines/Play Lines/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.PackageManagerUI.Editor">
+ <HintPath>C:/dev/unity/play_lines/Play Lines/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.AIModule">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2018.1.0f2/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>

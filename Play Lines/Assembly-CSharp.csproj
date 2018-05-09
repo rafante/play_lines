@@ -51,12 +51,26 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Modern UI Pack\Scripts\CustomDropdown.cs" />
+     <Compile Include="Assets\Modern UI Pack\Scripts\CustomInputField.cs" />
+     <Compile Include="Assets\Modern UI Pack\Scripts\DemoManager.cs" />
+     <Compile Include="Assets\Modern UI Pack\Scripts\DropdownItem.cs" />
+     <Compile Include="Assets\Modern UI Pack\Scripts\LaunchURL.cs" />
+     <Compile Include="Assets\Modern UI Pack\Scripts\NotificationExample.cs" />
+     <Compile Include="Assets\Modern UI Pack\Scripts\PBFilled.cs" />
+     <Compile Include="Assets\Modern UI Pack\Scripts\ProgressBar.cs" />
+     <Compile Include="Assets\Modern UI Pack\Scripts\RadialSlider.cs" />
+     <Compile Include="Assets\Modern UI Pack\Scripts\RatingSystem.cs" />
+     <Compile Include="Assets\Modern UI Pack\Scripts\SwitchAnim.cs" />
+     <Compile Include="Assets\Modern UI Pack\Scripts\ToggleAnim.cs" />
      <Compile Include="Assets\Scripts\ControladorCamera.cs" />
      <Compile Include="Assets\Scripts\ControladorCenas.cs" />
+     <Compile Include="Assets\Scripts\UI\AtualizadorTrechos.cs" />
      <Compile Include="Assets\Scripts\UI\BalaoTrecho.cs" />
      <Compile Include="Assets\Scripts\UI\LayoutHistoria.cs" />
      <Compile Include="Assets\Scripts\UI\NewCamera.cs" />
      <Compile Include="Assets\Scripts\UI\TipoBalaoTrecho.cs" />
+     <Compile Include="Assets\Scripts\Uteis\TipoConexao.cs" />
      <Compile Include="Assets\UIGraph\Scripts\Connection.cs" />
      <Compile Include="Assets\UIGraph\Scripts\ConnectionManager.cs" />
      <Compile Include="Assets\UIGraph\Scripts\ConnectionPoint.cs" />
@@ -65,11 +79,13 @@
      <Compile Include="Assets\UIGraph\Scripts\Util\ObfuscateObject.cs" />
      <Compile Include="Assets\UIGraph\Scripts\Util\ObfuscateText.cs" />
      <Compile Include="Assets\UIGraph\Scripts\Util\SpinCamera.cs" />
- <Reference Include="Unity.PackageManagerUI.Editor">
- <HintPath>C:/dev/unity/play_lines/Play Lines/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
- </Reference>
+     <None Include="Assets\Modern UI Pack\Licence.txt" />
+     <None Include="Assets\Modern UI Pack\Read Me.txt" />
  <Reference Include="UnityEditor.StandardEvents">
  <HintPath>C:/dev/unity/play_lines/Play Lines/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.PackageManagerUI.Editor">
+ <HintPath>C:/dev/unity/play_lines/Play Lines/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.AIModule">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2018.1.0f2/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>

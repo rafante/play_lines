@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LayoutHistoria : MonoBehaviour {
 
@@ -10,6 +11,7 @@ public class LayoutHistoria : MonoBehaviour {
 	public BalaoTrecho prefabBalaoTrecho;
 	public Connection prefabConexao;
 	public Canvas tela;
+	public InputField atualizadorTextos;
 
 	// Use this for initialization
 	void Start () {
@@ -43,8 +45,8 @@ public class LayoutHistoria : MonoBehaviour {
 		} else {
 			//Se já tiver 2 selecionados, remove a seleção de ambos
 			if (trechoSelecionado1 != null && trechoSelecionado2 != null) {
-				trechoSelecionado1.toggle.isOn = false;
-				trechoSelecionado2.toggle.isOn = false;
+				// trechoSelecionado1.toggle.isOn = false;
+				// trechoSelecionado2.toggle.isOn = false;
 
 				trechoSelecionado1 = balaoTrecho;
 				trechoSelecionado2 = null;
@@ -58,14 +60,24 @@ public class LayoutHistoria : MonoBehaviour {
 			}
 		}
 
-		atualizaBaloes ();
+		bool acionarAtualizadorTextos = false;
+		if(trechoSelecionado1 != null && trechoSelecionado2 == null)
+			acionarAtualizadorTextos = true;
 
+		if(acionarAtualizadorTextos)
+			atualizadorTextos.text = trechoSelecionado1.resumo.text;
+		else
+			atualizadorTextos.textComponent.text = "";
+		atualizadorTextos.gameObject.SetActive(acionarAtualizadorTextos);
+
+		if(trechoSelecionado1 == null && trechoSelecionado2 != null){
+			trechoSelecionado1 = trechoSelecionado2;
+			trechoSelecionado2 = null;
+		}
 	}
 
-	public void atualizaBaloes(){
-		foreach (BalaoTrecho balao in arrayTrechos) {
-			balao.grupoBotoes.SetActive (balao.toggle.isOn);
-		}
+	public void atualizaTextosDoTrechoSelecionado(){
+		trechoSelecionado1.resumo.text = atualizadorTextos.text;
 	}
 
 	/// <summary>
@@ -92,10 +104,15 @@ public class LayoutHistoria : MonoBehaviour {
 		
 	}
 
-	public Connection buscaConexao(BalaoTrecho balao){
+	public Connection buscaConexao(BalaoTrecho balao, TipoConexao tipoConexao){
 		Connection[] conexoes = GameObject.FindObjectsOfType<Connection> ();
 		foreach (Connection conexao in conexoes) {
-
+			bool temTrechoSelecionado1 = conexao.target[0] != null && conexao.target[0] == balao.GetComponent<RectTransform>();
+			bool temTrechoSelecionado2 = conexao.target[1] != null && conexao.target[1] == balao.GetComponent<RectTransform>();
+			if(tipoConexao == TipoConexao.PAI && temTrechoSelecionado2)
+				return conexao;
+			if(tipoConexao == TipoConexao.FILHO && temTrechoSelecionado1)
+				return conexao;
 		}
 		return null;
 	}
