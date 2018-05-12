@@ -12,10 +12,14 @@ public class LayoutHistoria : MonoBehaviour {
 	public Connection prefabConexao;
 	public Canvas tela;
 	public InputField atualizadorTextos;
+	public int id;
+
+	public Historias historias;
 
 	// Use this for initialization
 	void Start () {
 		tela = GameObject.FindObjectOfType<Canvas> ();
+		Sincronizador.carregar();
 		atualizaArrayTrechos ();
 		if (arrayTrechos.Length == 1) {
 			arrayTrechos [0].toggle.isOn = true;
@@ -33,6 +37,11 @@ public class LayoutHistoria : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		atualizaArrayTrechos ();
+		historias = Sincronizador.historias;
+	}
+
+	public void salvarDiagrama(){
+		Sincronizador.salvarDiagrama(this);
 	}
 
 	public void selecionar(BalaoTrecho balaoTrecho){
@@ -96,7 +105,24 @@ public class LayoutHistoria : MonoBehaviour {
 		novoBalao.toggle.isOn = true;
 		//Cria a conexão;
 		if (tipoDoBalao != TipoBalaoTrecho.INICIO) {
-			criaConexao ();
+			criaConexao();
+		}
+	}
+
+	public void deletarBalaoTrecho(){
+		if(trechoSelecionado1 != null){
+			desconectar(trechoSelecionado1, TipoConexao.FILHO, TipoConexao.PAI);
+		}
+		if(trechoSelecionado2 != null){
+			desconectar(trechoSelecionado2, TipoConexao.FILHO, TipoConexao.PAI);
+		}
+	}
+
+	public void desconectar(BalaoTrecho balaoTrecho, params TipoConexao[] tipos){
+		foreach(TipoConexao tipo in tipos){
+			Connection conexao = buscaConexao(balaoTrecho, tipo);
+			
+			Destroy(conexao);
 		}
 	}
 
@@ -105,16 +131,21 @@ public class LayoutHistoria : MonoBehaviour {
 	}
 
 	public Connection buscaConexao(BalaoTrecho balao, TipoConexao tipoConexao){
-		Connection[] conexoes = GameObject.FindObjectsOfType<Connection> ();
-		foreach (Connection conexao in conexoes) {
-			bool temTrechoSelecionado1 = conexao.target[0] != null && conexao.target[0] == balao.GetComponent<RectTransform>();
-			bool temTrechoSelecionado2 = conexao.target[1] != null && conexao.target[1] == balao.GetComponent<RectTransform>();
-			if(tipoConexao == TipoConexao.PAI && temTrechoSelecionado2)
-				return conexao;
-			if(tipoConexao == TipoConexao.FILHO && temTrechoSelecionado1)
-				return conexao;
+		var conexoes = ConnectionManager.FindConnections(balao.gameObject);
+		foreach(Connection conexao in conexoes){
+			
 		}
 		return null;
+		// Connection[] conexoes = GameObject.FindObjectsOfType<Connection> ();
+		// foreach (Connection conexao in conexoes) {
+		// 	bool temTrechoSelecionado1 = conexao.target[0] != null && conexao.target[0] == balao.GetComponent<RectTransform>();
+		// 	bool temTrechoSelecionado2 = conexao.target[1] != null && conexao.target[1] == balao.GetComponent<RectTransform>();
+		// 	if(tipoConexao == TipoConexao.PAI && temTrechoSelecionado2)
+		// 		return conexao;
+		// 	if(tipoConexao == TipoConexao.FILHO && temTrechoSelecionado1)
+		// 		return conexao;
+		// }
+		// return null;
 	}
 
 	public void atualizaConexoes(){
@@ -127,23 +158,8 @@ public class LayoutHistoria : MonoBehaviour {
 	}
 
 	public void criaConexao(){
-		if (trechoSelecionado1 != null && trechoSelecionado2 != null) {
-			var conexoes = GameObject.FindObjectsOfType<Connection> ();
-			Connection con = null;
-			foreach (Connection conexao in conexoes) {
-				BalaoTrecho balao1 = conexao.target [0].GetComponent<BalaoTrecho>();
-				BalaoTrecho balao2 = conexao.target [1].GetComponent<BalaoTrecho>();
-				//se ambos os baloes forem os trechos selecionados e um for diferente do outro, cria uma conexao
-				if ((balao1 == trechoSelecionado1 || balao1 == trechoSelecionado2) && (balao2 == trechoSelecionado1 || balao2 == trechoSelecionado2)) {
-					if (balao1 != balao2) {
-						con = conexao;
-						break;
-					}
-				}
-			}
-			if(con == null)
-				con = Instantiate (prefabConexao) as Connection;
-			con.SetTargets (trechoSelecionado1.GetComponent<RectTransform> (), trechoSelecionado2.GetComponent<RectTransform> ());
+		if(trechoSelecionado1 != null && trechoSelecionado2 != null){
+			ConnectionManager.CreateConnection(trechoSelecionado1.gameObject, trechoSelecionado2.gameObject);
 		}
 	}
 

@@ -15,6 +15,7 @@ public class BalaoTrecho : MonoBehaviour, IDragHandler, IEndDragHandler {
 	public Text resumo;
 	public Image borda;
 	public bool dragging;
+	public string balaoId;
 	public Color selecionadoUnico, selecionadoUm, selecionadoDois, naoSelecionado;
 
 	// Use this for initialization
@@ -26,7 +27,11 @@ public class BalaoTrecho : MonoBehaviour, IDragHandler, IEndDragHandler {
 		toggle.onValueChanged.AddListener(delegate {
 			mudarCorToggle();
 		});
+		this.balaoId = Sincronizador.getNovoId();
+	}
 
+	void Update(){
+		
 	}
 
     /// <summary>

@@ -27,7 +27,7 @@ public class ConnectionManager : MonoBehaviour {
 
 	[SerializeField] Connection connectionPrefab;
 	[SerializeField] List<Connection> connections = new List<Connection>();
-
+	
 	public static Connection FindConnection(RectTransform t1, RectTransform t2) {
 		if (!instance) return null;
 
@@ -40,6 +40,10 @@ public class ConnectionManager : MonoBehaviour {
 		}
 
 		return null;
+	}
+
+	public static List<Connection> FindConnections(GameObject obj){
+		return FindConnections(obj.GetComponent<RectTransform>());
 	}
 
 	public static List<Connection> FindConnections(RectTransform transform) {
@@ -95,8 +99,14 @@ public class ConnectionManager : MonoBehaviour {
 		}
 	}
 
+	public static void CreateConnection(GameObject obj1, GameObject obj2){
+		if(obj1 != null && obj2 != null)
+			CreateConnection(obj1.GetComponent<RectTransform>(), obj2.GetComponent<RectTransform>());
+	}
+
 	public static void CreateConnection(RectTransform t1, RectTransform t2 = null) {
-		if (!instance) return;
+		if (!instance) 
+			return;
 		
 		Connection conn;
 
@@ -107,5 +117,6 @@ public class ConnectionManager : MonoBehaviour {
 		}
 
 		conn.SetTargets(t1, t2);
+		return;
 	}
 }
