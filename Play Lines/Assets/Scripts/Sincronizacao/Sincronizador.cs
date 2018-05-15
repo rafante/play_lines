@@ -33,6 +33,12 @@ public class Sincronizador
     {
         // historiasStr = Resources.Load<TextAsset>(arquivoHistorias.Replace(".json", "")).text;
         historiasStr = PlayerPrefs.GetString("historia");
+        if(historiasStr == null || historiasStr == ""){
+            Historia historia = new Historia();
+            ComposicaoHistoria.historia = historia;
+            salvarHistoria();
+            historiasStr = PlayerPrefs.GetString("historia");
+        }            
         Debug.Log(historiasStr);
         historias = JsonUtility.FromJson<Historias>(historiasStr);
         Debug.Log(historias);

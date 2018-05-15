@@ -85,6 +85,8 @@ public class LayoutHistoria : MonoBehaviour
 
     public void montarDiagrama()
     {
+        if(historia == null || historia.trechos == null)
+            return;
         limpaDiagrama();
         for (int i = 0; i < historia.trechos.Length; i++)
         {
