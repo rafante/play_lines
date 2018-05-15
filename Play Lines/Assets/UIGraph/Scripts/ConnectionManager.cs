@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 
 public class ConnectionManager : MonoBehaviour {
-	static ConnectionManager _instance;
+	static ConnectionManager _instance = null;
 	public static ConnectionManager instance {
 		get {
-			if (!_instance) {
+			if (_instance == null) {
 				//first try to find one in the scene
 				_instance = FindObjectOfType<ConnectionManager>();
 
@@ -27,6 +27,10 @@ public class ConnectionManager : MonoBehaviour {
 
 	[SerializeField] Connection connectionPrefab;
 	[SerializeField] List<Connection> connections = new List<Connection>();
+
+	static List<Connection> getConnections(){
+		return instance.connections;
+	}
 	
 	public static Connection FindConnection(RectTransform t1, RectTransform t2) {
 		if (!instance) return null;
@@ -40,10 +44,6 @@ public class ConnectionManager : MonoBehaviour {
 		}
 
 		return null;
-	}
-
-	public static List<Connection> FindConnections(GameObject obj){
-		return FindConnections(obj.GetComponent<RectTransform>());
 	}
 
 	public static List<Connection> FindConnections(RectTransform transform) {
@@ -69,6 +69,37 @@ public class ConnectionManager : MonoBehaviour {
 			instance.connections.Add(c);
 		}
 	}
+
+	/// <summary>
+    /// Update is called every frame, if the MonoBehaviour is enabled.
+    /// </summary>
+    void OnGUI()
+    {
+		CleanConnections();
+    }
+
+    public void removeConexoesInvalidas()
+    {
+        var conexoes = instance.connections;
+        var max = conexoes.Count;
+        for(int i = 0; i < max; i++){
+            Connection conexao = conexoes[i];
+            if(!conexao.valida()){
+                RemoveConnection(conexao);
+            }
+        }
+    }
+
+	public static List<Connection> FindConnections(GameObject obj)
+    {
+        return FindConnections(obj.GetComponent<RectTransform>());
+    }
+
+    public static Connection criaConexao(GameObject g1, GameObject g2)
+    {
+        return CreateConnection(g1.GetComponent<RectTransform>(), g2.GetComponent<RectTransform>());
+    }
+
 
 	public static void RemoveConnection(Connection c) {
 		//don't use the property here. We don't want to create an instance when the scene loads
@@ -99,14 +130,16 @@ public class ConnectionManager : MonoBehaviour {
 		}
 	}
 
-	public static void CreateConnection(GameObject obj1, GameObject obj2){
-		if(obj1 != null && obj2 != null)
-			CreateConnection(obj1.GetComponent<RectTransform>(), obj2.GetComponent<RectTransform>());
-	}
+	
 
-	public static void CreateConnection(RectTransform t1, RectTransform t2 = null) {
+	// public static void CreateConnection(GameObject obj1, GameObject obj2){
+	// 	if(obj1 != null && obj2 != null)
+	// 		CreateConnection(obj1.GetComponent<RectTransform>(), obj2.GetComponent<RectTransform>());
+	// }
+
+	public static Connection CreateConnection(RectTransform t1, RectTransform t2 = null) {
 		if (!instance) 
-			return;
+			return null;
 		
 		Connection conn;
 
@@ -117,6 +150,6 @@ public class ConnectionManager : MonoBehaviour {
 		}
 
 		conn.SetTargets(t1, t2);
-		return;
+		return conn;
 	}
 }

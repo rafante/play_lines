@@ -1,3 +1,248 @@
-{
-    
-}
+FUNCTION crm_order_maintain.
+*"----------------------------------------------------------------------
+*"*"Local Interface:
+*"  IMPORTING
+*"     REFERENCE(IT_OPPORT_H) TYPE  CRMT_OPPORT_H_COMT OPTIONAL
+*"     REFERENCE(IT_LEAD_H) TYPE  CRMT_LEAD_H_COMT OPTIONAL
+*"     REFERENCE(IT_ACTIVITY_H) TYPE  CRMT_ACTIVITY_H_COMT OPTIONAL
+*"     REFERENCE(IT_LAWREF_H) TYPE  CRMT_LAWREF_H_COMT OPTIONAL
+*"     REFERENCE(IT_SALES) TYPE  CRMT_SALES_COMT OPTIONAL
+*"     REFERENCE(IT_PRICING) TYPE  CRMT_PRICING_COMT OPTIONAL
+*"     REFERENCE(IT_PRICING_I) TYPE  CRMT_PRICING_I_COMT OPTIONAL
+*"     REFERENCE(IT_PRIDOC) TYPE  CRMT_PRIDOC_COMT OPTIONAL
+*"     REFERENCE(IT_ORGMAN) TYPE  CRMT_ORGMAN_COMT OPTIONAL
+*"     REFERENCE(IT_SHIPPING) TYPE  CRMT_SHIPPING_COMT OPTIONAL
+*"     REFERENCE(IT_ACTIVITY_I) TYPE  CRMT_ACTIVITY_I_COMT OPTIONAL
+*"     REFERENCE(IT_PRODUCT_I) TYPE  CRMT_PRODUCT_I_COMT OPTIONAL
+*"     REFERENCE(IT_BATCH) TYPE  CRMT_BATCH_COMT OPTIONAL
+*"     REFERENCE(IT_FINPROD_I) TYPE  CRMT_FINPROD_I_COMT OPTIONAL
+*"     REFERENCE(IT_STRUCT_I) TYPE  CRMT_STRUCT_I_COMT OPTIONAL
+*"     REFERENCE(IT_CONFIG) TYPE  CRMT_CONFIG_COMT OPTIONAL
+*"     REFERENCE(IT_PAYPLAN) TYPE  CRMT_PAYPLAN_COMT OPTIONAL
+*"     REFERENCE(IT_PAYPLAN_D) TYPE  CRMT_PAYPLAN_D_COMT OPTIONAL
+*"     REFERENCE(IT_CUSTOMER_H) TYPE  CRMT_CUSTOMER_H_COMT OPTIONAL
+*"     REFERENCE(IT_CUSTOMER_I) TYPE  CRMT_CUSTOMER_I_COMT OPTIONAL
+*"     REFERENCE(IT_SERVICE_H) TYPE  CRMT_SERVICE_H_COMT OPTIONAL
+*"     REFERENCE(IT_SERVICE_I) TYPE  CRMT_SERVICE_I_COMT OPTIONAL
+*"     REFERENCE(IT_SERVICE_ASSIGN) TYPE  CRMT_SERVICE_ASSIGN_COMT
+*"       OPTIONAL
+*"     REFERENCE(IT_QUALIF) TYPE  CRMT_QUALIF_COMT OPTIONAL
+*"     REFERENCE(IT_APPOINTMENT) TYPE  CRMT_APPOINTMENT_COMT OPTIONAL
+*"     REFERENCE(IT_TEXT) TYPE  CRMT_TEXT_COMT OPTIONAL
+*"     REFERENCE(IT_SCHEDLIN_I) TYPE  CRMT_SCHEDLIN_I_COMT OPTIONAL
+*"     REFERENCE(IT_PARTNER) TYPE  CRMT_PARTNER_COMT OPTIONAL
+*"     REFERENCE(IT_SERVICE_OS) TYPE  CRMT_SRV_OSSET_COMT OPTIONAL
+*"     REFERENCE(IT_REFOBJ) TYPE  CRMT_REFOBJ_COMT OPTIONAL
+*"     REFERENCE(IT_SUBJECT) TYPE  CRMT_SUBJECT_COMT OPTIONAL
+*"     REFERENCE(IT_CANCEL) TYPE  CRMT_CANCEL_COMT OPTIONAL
+*"     REFERENCE(IT_CANCEL_IR) TYPE  CRMT_CANCEL_IR_COMT OPTIONAL
+*"     REFERENCE(IT_CANCEL_DATES) TYPE  CRMT_CANCEL_RULES_TAB OPTIONAL
+*"     REFERENCE(IT_STATUS) TYPE  CRMT_STATUS_COMT OPTIONAL
+*"     REFERENCE(IT_BILLPLAN) TYPE  CRMT_BILLPLAN_COMT OPTIONAL
+*"     REFERENCE(IT_BILLING) TYPE  CRMT_BILLING_COMT OPTIONAL
+*"     REFERENCE(IT_ORDPRP_I) TYPE  CRMT_ORDPRP_I_COMT OPTIONAL
+*"     REFERENCE(IT_ORDPRP_I_D) TYPE  CRMT_ORDPRP_I_D_COMT OPTIONAL
+*"     REFERENCE(IT_ORDPRP_OBJL_I_D) TYPE  CRMT_ORDPRP_OBJL_I_D_COMT
+*"       OPTIONAL
+*"     REFERENCE(IT_CUMULATED_I) TYPE  CRMT_CUMULATED_I_COMT OPTIONAL
+*"     REFERENCE(IT_SERVICEPLAN_I) TYPE  CRMT_SERVICEPLAN_I_COMT
+*"       OPTIONAL
+*"     REFERENCE(IT_SERVICEPLAN_IE) TYPE  CRMT_SERVICEPLAN_IE_COMT
+*"       OPTIONAL
+*"     REFERENCE(IT_PRICE_AGREEMENTS_BBP) TYPE
+*"        CRMT_PRICE_AGREEMENTS_BBP_COMT OPTIONAL
+*"     REFERENCE(IT_PRICE_AGREEMENTS_CRM) TYPE
+*"        CRMT_PRICE_AGREEMENTS_CRM_COMT OPTIONAL
+*"     REFERENCE(IT_CONFIG_FILTER) TYPE  CRMT_CONFIG_FILTER_COMT
+*"       OPTIONAL
+*"     REFERENCE(IT_AC_ASSIGN) TYPE  CRMT_AC_ASSIGN_COMT OPTIONAL
+*"     REFERENCE(IT_SURVEY) TYPE  CRMT_SURVEY_COMT OPTIONAL
+*"     REFERENCE(IT_EXTENSION) TYPE  CRMT_EXTENSION_COMT OPTIONAL
+*"     REFERENCE(IT_ACTIVE_SWITCH) TYPE  CRMT_ACTIVE_SWITCH_T OPTIONAL
+*"     REFERENCE(IT_UBB_CTR_I) TYPE  CRMT_UBB_CTR_I_COMT OPTIONAL
+*"     REFERENCE(IT_UBB_CR_I) TYPE  CRMT_UBB_CR_I_COMT OPTIONAL
+*"     REFERENCE(IT_UBB_VOL_I) TYPE  CRMT_UBB_VOL_I_COMT OPTIONAL
+*"     REFERENCE(IT_APO_I) TYPE  CRMT_APO_I_COMT OPTIONAL
+*"     REFERENCE(IT_CHNGPROC_I) TYPE  CRMT_CHNGPROC_I_COMT OPTIONAL
+*"     REFERENCE(IT_EXT_REF) TYPE  CRMT_EXT_REF_COMT OPTIONAL
+*"     REFERENCE(IT_DOC_FLOW_PNT) TYPE  CRMT_DOC_FLOW_PNT_COMT OPTIONAL
+*"     REFERENCE(IT_CHNGPROC_H) TYPE  CRMT_CHNGPROC_H_COMT OPTIONAL
+*"     REFERENCE(IT_FUND_H) TYPE  CRMT_FUND_H_COMT OPTIONAL
+*"     REFERENCE(IT_CLA_H) TYPE  CRMT_CLA_H_COMT OPTIONAL
+*"     REFERENCE(IT_SRV_REQ_H) TYPE  CRMT_SRV_REQ_H_COMT OPTIONAL
+*"     REFERENCE(IT_APPROVAL) TYPE  CRMT_APPROVAL_COMT OPTIONAL
+*"     REFERENCE(IT_EXTENSION2) TYPE  CRMT_EXTENSION2_COMT OPTIONAL
+*"     REFERENCE(IT_CLA_I) TYPE  CRMT_CLA_I_COMT OPTIONAL
+*"     REFERENCE(IT_OPPORT_I) TYPE  CRMT_OPPORT_I_COMT OPTIONAL
+*"  EXPORTING
+*"     REFERENCE(ET_EXCEPTION) TYPE  CRMT_EXCEPTION_T
+*"  CHANGING
+*"     REFERENCE(CT_ORDERADM_H) TYPE  CRMT_ORDERADM_H_COMT OPTIONAL
+*"     REFERENCE(CT_ORDERADM_I) TYPE  CRMT_ORDERADM_I_COMT OPTIONAL
+*"     REFERENCE(CT_INPUT_FIELDS) TYPE  CRMT_INPUT_FIELD_TAB OPTIONAL
+*"     REFERENCE(CV_LOG_HANDLE) TYPE  BALLOGHNDL OPTIONAL
+*"     REFERENCE(CT_PARTNER_ATTRIBUTES) TYPE
+*"        CRMT_PARTNER_ATTRIBUTE_COM_TAB OPTIONAL
+*"     REFERENCE(CT_DOC_FLOW) TYPE  CRMT_DOC_FLOW_COMT OPTIONAL
+*"  EXCEPTIONS
+*"      ERROR_OCCURRED
+*"      DOCUMENT_LOCKED
+*"      NO_CHANGE_ALLOWED
+*"      NO_AUTHORITY
+*"----------------------------------------------------------------------
+
+  DATA:
+    lv_collect_exceptions TYPE crmt_boolean,
+    lr_exception          TYPE REF TO cx_root.
+
+  CHECK NOT ct_input_fields       IS INITIAL OR
+        NOT it_active_switch      IS INITIAL OR
+        NOT ct_partner_attributes IS INITIAL.
+
+* Debug functionality for external calls of One Order APIs
+  INCLUDE crm_trace_maintain.
+  PERFORM crm_debug_ex.
+
+  IF et_exception IS REQUESTED.
+* collect exceptions -> for multi order processing
+    lv_collect_exceptions = true.
+  ELSE.
+    lv_collect_exceptions = false.
+  ENDIF.
+
+  TRY.
+
+      CALL FUNCTION 'CRM_ORDER_MAINTAIN_MULTI_OW'
+        EXPORTING
+          it_opport_h             = it_opport_h
+          it_lead_h               = it_lead_h
+          it_activity_h           = it_activity_h
+          it_service_h            = it_service_h
+          it_chngproc_h           = it_chngproc_h
+          it_service_i            = it_service_i
+          it_service_assign       = it_service_assign
+          it_qualif               = it_qualif
+          it_customer_h           = it_customer_h
+          it_sales                = it_sales
+          it_pricing              = it_pricing
+          it_pricing_i            = it_pricing_i
+          it_pridoc               = it_pridoc
+          it_orgman               = it_orgman
+          it_shipping             = it_shipping
+          it_activity_i           = it_activity_i
+          it_product_i            = it_product_i
+          it_batch                = it_batch
+          it_finprod_i            = it_finprod_i
+          it_chngproc_i           = it_chngproc_i
+          it_customer_i           = it_customer_i
+          it_config               = it_config
+          it_payplan              = it_payplan
+          it_payplan_d            = it_payplan_d
+          it_appointment          = it_appointment
+          it_text                 = it_text
+          it_schedlin_i           = it_schedlin_i
+          it_partner              = it_partner
+          it_serviceplan_i        = it_serviceplan_i
+          it_serviceplan_ie       = it_serviceplan_ie
+          it_service_os           = it_service_os
+          it_refobj               = it_refobj
+          it_subject              = it_subject
+          it_cancel               = it_cancel
+          it_cancel_ir            = it_cancel_ir
+          it_approval             = it_approval
+          it_cancel_dates         = it_cancel_dates
+          it_status               = it_status
+          it_billplan             = it_billplan
+          it_billing              = it_billing
+          iv_collect_exceptions   = lv_collect_exceptions
+          it_ordprp_i             = it_ordprp_i
+          it_ordprp_i_d           = it_ordprp_i_d
+          it_ordprp_objl_i_d      = it_ordprp_objl_i_d
+          it_cumulated_i          = it_cumulated_i
+          it_price_agreements_bbp = it_price_agreements_bbp
+          it_price_agreements_crm = it_price_agreements_crm
+          it_config_filter        = it_config_filter
+          it_ac_assign            = it_ac_assign
+          it_survey               = it_survey
+          it_extension            = it_extension
+          it_active_switch        = it_active_switch
+          it_ubb_ctr_i            = it_ubb_ctr_i
+          it_ubb_cr_i             = it_ubb_cr_i
+          it_ubb_vol_i            = it_ubb_vol_i
+          it_apo_i                = it_apo_i
+          it_ext_ref              = it_ext_ref
+          it_doc_flow_pnt         = it_doc_flow_pnt
+          it_fund_h               = it_fund_h
+          it_cla_h                = it_cla_h
+          it_lawref_h             = it_lawref_h
+          it_srv_req_h            = it_srv_req_h
+          it_extension2           = it_extension2
+          it_cla_i                = it_cla_i
+          it_opport_i             = it_opport_i
+        IMPORTING
+          et_exception            = et_exception
+        CHANGING
+          ct_orderadm_h           = ct_orderadm_h
+          ct_orderadm_i           = ct_orderadm_i
+          ct_input_fields         = ct_input_fields
+          cv_log_handle           = cv_log_handle
+          ct_partner_attributes   = ct_partner_attributes
+          ct_doc_flow             = ct_doc_flow
+        EXCEPTIONS
+          error_occurred          = 01
+          no_change_allowed       = 02
+          document_locked         = 03
+          no_authority            = 04
+          OTHERS                  = 05.
+
+      IF sy-subrc <> 0.
+        CASE sy-subrc.
+          WHEN 1 OR 5.
+            MESSAGE ID sy-msgid TYPE sy-msgty NUMBER sy-msgno
+                    WITH sy-msgv1 sy-msgv2 sy-msgv3 sy-msgv4
+                    RAISING error_occurred.
+          WHEN 2.
+            MESSAGE ID sy-msgid TYPE sy-msgty NUMBER sy-msgno
+                   WITH sy-msgv1 sy-msgv2 sy-msgv3 sy-msgv4
+                   RAISING no_change_allowed.
+          WHEN 3.
+            MESSAGE ID sy-msgid TYPE sy-msgty NUMBER sy-msgno
+              WITH sy-msgv1 sy-msgv2 sy-msgv3 sy-msgv4
+              RAISING document_locked.
+          WHEN 4.
+            MESSAGE ID sy-msgid TYPE sy-msgty NUMBER sy-msgno
+              WITH sy-msgv1 sy-msgv2 sy-msgv3 sy-msgv4
+              RAISING no_authority.
+        ENDCASE.
+      ENDIF.
+
+    CATCH cx_root INTO lr_exception.                     "#EC CATCH_ALL
+      DATA:
+        lv_msg_dump        TYPE string,
+        lv_msg_responsible TYPE string,
+        lv_exception_text  TYPE string,
+        lv_program_name    TYPE syrepid,
+        lv_include_name    TYPE syrepid,
+        lv_source_line     TYPE i.
+
+      lv_exception_text = lr_exception->get_longtext( ).
+
+      lr_exception->get_source_position( IMPORTING program_name = lv_program_name
+                                                   include_name = lv_include_name
+                                                   source_line  = lv_source_line ).
+
+      MESSAGE i700(crm_order) INTO lv_msg_dump.
+      MESSAGE i701(crm_order) INTO lv_msg_responsible.
+* message <xyz> with &1 &2 &3 &4 allows only 200 chars text
+* -> use assert to offer more information
+      ASSERT
+        FIELDS    lv_msg_dump
+                  lv_exception_text
+                  lv_msg_responsible
+                  lv_program_name
+                  lv_include_name
+                  lv_source_line
+        CONDITION 1 = 2.
+  ENDTRY.
+
+ENDFUNCTION.

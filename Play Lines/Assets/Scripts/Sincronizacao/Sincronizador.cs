@@ -16,7 +16,7 @@ public class Sincronizador
     public static string historiasStr = "";
     public static string baloesStr = "";
 
-    public static int maxId = 0;
+    public static int maxId = -1;
 
     public static Historias historias = new Historias();
     public static Baloes baloes = new Baloes();
@@ -39,6 +39,14 @@ public class Sincronizador
 
     }
 
+    public static Historia carregarHistoria()
+    {
+        carregar();
+        var histStr = Resources.Load<TextAsset>(arquivoHistorias.Replace(".json", "")).text;
+        Historia historia = JsonUtility.FromJson<Historia>(histStr);
+        return historia;
+    }
+
     public static byte[] GetHash(string inputString)
     {
         HashAlgorithm algorithm = MD5.Create();  //or use SHA256.Create();
@@ -56,23 +64,14 @@ public class Sincronizador
 
     public static string getNovoId()
     {
-        return GetHashString(userName) + GetHashString(userEmail) + ++maxId;
+        return (++maxId).ToString(); // GetHashString(userName) + GetHashString(userEmail) + ++maxId;
     }
 
-    public static void salvarDiagrama(LayoutHistoria layout)
+    public static void salvarHistoria()
     {
-        Connection[] conexoes = GameObject.FindObjectsOfType<Connection>();
-        Diagrama diagrama = new Diagrama();
-        diagrama.conexoes = new Conexao[conexoes.Length];
-        for (int i = 0; i < conexoes.Length; i++)
-        {
-            var con = new Conexao();
-            con.balao1 = conexoes[i].target[0].gameObject.GetComponent<BalaoTrecho>().balaoId;
-            con.balao2 = conexoes[i].target[1].gameObject.GetComponent<BalaoTrecho>().balaoId;
-            diagrama.conexoes[i] = con;
-        }
-        historias.diagramas = new Diagrama[1];
-        historias.diagramas[0] = diagrama;
-        salvar();
+        Historia historia = ComposicaoHistoria.historia;
+        string historiasStr = JsonUtility.ToJson(historia);
+        string path = Application.dataPath + "/Resources/" + arquivoHistorias;
+        File.WriteAllText(path, historiasStr);
     }
 }

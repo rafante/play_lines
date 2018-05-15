@@ -24,8 +24,22 @@ public class Connection : MonoBehaviour {
 	}
 
 	public bool isValid {
-		get {return target[0] && target[1];}
+		get {return target[0] && target[1] && valida();}
 	}
+
+	public BalaoTrecho balaoPai{
+        get{ return target[0] == null ? null : target[0].gameObject.GetComponent<BalaoTrecho>(); }
+    }
+    public BalaoTrecho balaoFilho {
+        get { return target[1] == null ? null : target[1].gameObject.GetComponent<BalaoTrecho>(); }
+    }
+
+    public bool valida()
+    {   
+		bool b1 = balaoPai.ehPai(balaoFilho);
+		bool b2 = balaoFilho.ehPai(balaoPai);
+		return b1 && !b2;
+    }
 
 	public bool Match(RectTransform start, RectTransform end) {
 		if (!start || !end) return false;
