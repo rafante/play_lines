@@ -31,7 +31,8 @@ public class Sincronizador
 
     public static void carregar()
     {
-        historiasStr = Resources.Load<TextAsset>(arquivoHistorias.Replace(".json", "")).text;
+        // historiasStr = Resources.Load<TextAsset>(arquivoHistorias.Replace(".json", "")).text;
+        historiasStr = PlayerPrefs.GetString("historia");
         Debug.Log(historiasStr);
         historias = JsonUtility.FromJson<Historias>(historiasStr);
         Debug.Log(historias);
@@ -42,8 +43,9 @@ public class Sincronizador
     public static Historia carregarHistoria()
     {
         carregar();
-        var histStr = Resources.Load<TextAsset>(arquivoHistorias.Replace(".json", "")).text;
-        Historia historia = JsonUtility.FromJson<Historia>(histStr);
+        Historia historia = JsonUtility.FromJson<Historia>(historiasStr);
+        // var histStr = Resources.Load<TextAsset>(arquivoHistorias.Replace(".json", "")).text;
+        // Historia historia = JsonUtility.FromJson<Historia>(histStr);
         return historia;
     }
 
@@ -62,16 +64,30 @@ public class Sincronizador
         return sb.ToString();
     }
 
+    public static int getMaiorId(){
+        int maior = 0;
+        foreach(Trecho trecho in ComposicaoHistoria.historia.trechos){
+            int trechoId = int.Parse(trecho.id);
+            if(trechoId > maior){
+                maior = trechoId;
+            }
+        }
+        return maior;
+    }
+
     public static string getNovoId()
     {
-        return (++maxId).ToString(); // GetHashString(userName) + GetHashString(userEmail) + ++maxId;
+        var maiorId = getMaiorId();
+        return (++maiorId).ToString(); // GetHashString(userName) + GetHashString(userEmail) + ++maxId;
     }
 
     public static void salvarHistoria()
     {
         Historia historia = ComposicaoHistoria.historia;
         string historiasStr = JsonUtility.ToJson(historia);
-        string path = Application.dataPath + "/Resources/" + arquivoHistorias;
-        File.WriteAllText(path, historiasStr);
+        PlayerPrefs.SetString("historia", historiasStr);
+        PlayerPrefs.Save();
+        // string path = Application.dataPath + "/Resources/" + arquivoHistorias;
+        // File.WriteAllText(path, historiasStr);
     }
 }

@@ -46,9 +46,9 @@ public class LayoutHistoria : MonoBehaviour
 
         foreach (BalaoTrecho balao in arrayTrechos)
         {
-            if(trecho1 != null && trecho1 == balao.trecho.id)
+            if (trecho1 != null && trecho1 == balao.trecho.id)
                 balao.borda.color = corTrecho1;
-            else if(trecho2 != null && trecho2 == balao.trecho.id)
+            else if (trecho2 != null && trecho2 == balao.trecho.id)
                 balao.borda.color = corTrecho2;
             else
                 balao.borda.color = corNaoSelecionado;
@@ -118,9 +118,35 @@ public class LayoutHistoria : MonoBehaviour
         trechoSelecionado1.resumo.text = atualizadorTextos.text;
     }
 
+    public bool apenasUmSelecionado()
+    {
+        return trechoSelecionado1 != null && trechoSelecionado2 == null;
+    }
+
     public void criarBalaoTrecho()
     {
-        novoBalaoTrecho();
+        BalaoTrecho balao = novoBalaoTrecho();
+        var transf = balao.GetComponent<RectTransform>();
+        Vector2 novaPosicao = transf.localPosition;
+
+        var trechos = new List<Trecho>(historia.trechos);
+        trechos.Add(balao.trecho);
+        historia.trechos = trechos.ToArray();
+
+        if (apenasUmSelecionado())
+        {
+            trechoSelecionado1.trecho.setPai(balao.trecho);
+            novaPosicao.x = trechoSelecionado1.trecho.representacao.posicao.x;
+            novaPosicao.y = trechoSelecionado1.trecho.representacao.posicao.y - balao.altura - 10;
+        }
+        else
+        {
+            balao.transform.localPosition = Vector3.zero;
+            balao.transform.localScale = Vector3.one;
+        }
+
+        transf.localPosition = novaPosicao;
+        alternarBalao(balao);
     }
 
     public void alternarBalao(BalaoTrecho balaoTrecho)
@@ -128,14 +154,20 @@ public class LayoutHistoria : MonoBehaviour
         bool ehOtrecho1 = trechoSelecionado1 != null && trechoSelecionado1 == balaoTrecho;
         bool ehOtrecho2 = trechoSelecionado2 != null && trechoSelecionado2 == balaoTrecho;
 
-        if(!ehOtrecho1 && !ehOtrecho2 && trechoSelecionado1 != null && trechoSelecionado2 != null){
+        if (!ehOtrecho1 && !ehOtrecho2 && trechoSelecionado1 != null && trechoSelecionado2 != null)
+        {
             trechoSelecionado1 = balaoTrecho;
             trechoSelecionado2 = null;
-        }else if(ehOtrecho1){
+        }
+        else if (ehOtrecho1)
+        {
             trechoSelecionado1 = null;
-        }else if(ehOtrecho2){
+        }
+        else if (ehOtrecho2)
+        {
             trechoSelecionado2 = null;
-        }else if (trechoSelecionado1 == null)
+        }
+        else if (trechoSelecionado1 == null)
         {
             trechoSelecionado1 = balaoTrecho;
         }
@@ -144,26 +176,31 @@ public class LayoutHistoria : MonoBehaviour
             trechoSelecionado2 = balaoTrecho;
         }
 
-        if(trechoSelecionado1 == null && trechoSelecionado2 != null){
+        if (trechoSelecionado1 == null && trechoSelecionado2 != null)
+        {
             trechoSelecionado1 = trechoSelecionado2;
             trechoSelecionado2 = null;
         }
-        
+
         alternarAtualizador(trechoSelecionado1 != null && trechoSelecionado2 == null);
     }
 
-    public void alternarAtualizador(bool ativar){
-        if(ativar)
+    public void alternarAtualizador(bool ativar)
+    {
+        if (ativar)
             atualizadorTextos.textComponent.text = trechoSelecionado1.trecho.getResumoStr();
         atualizadorTextos.gameObject.SetActive(ativar);
     }
 
-    public void apagarBaloes(){
-        if(trechoSelecionado2 != null){
+    public void apagarBaloes()
+    {
+        if (trechoSelecionado2 != null)
+        {
             Destroy(trechoSelecionado2.gameObject);
             alternarBalao(trechoSelecionado2);
         }
-        if(trechoSelecionado1 != null){
+        if (trechoSelecionado1 != null)
+        {
             Destroy(trechoSelecionado1.gameObject);
             alternarBalao(trechoSelecionado1);
         }
@@ -172,6 +209,7 @@ public class LayoutHistoria : MonoBehaviour
     public BalaoTrecho novoBalaoTrecho()
     {
         BalaoTrecho novoBalao = Instantiate(prefabBalaoTrecho) as BalaoTrecho;
+        novoBalao.trecho = new Trecho(TipoTrecho.INICIO);
         novoBalao.transform.SetParent(tela.transform);
         novoBalao.transform.localScale = Vector3.one;
         novoBalao.transform.localPosition = Vector3.zero;
@@ -210,11 +248,13 @@ public class LayoutHistoria : MonoBehaviour
     public void desconectar(BalaoTrecho balaoPai, BalaoTrecho balaoFilho)
     {
         balaoFilho.removerPai(balaoPai);
+        atualizaConexoes();
     }
 
     public void conectar(BalaoTrecho balaoPai, BalaoTrecho balaoFilho)
     {
         balaoFilho.adicionaPai(balaoPai);
+        atualizaConexoes();
     }
 
     public void alternaConectado()

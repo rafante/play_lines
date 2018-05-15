@@ -52,7 +52,7 @@ public class Trecho
         pais = new string[0];
         representacao = new BalaoRepresentacao();
         aplicacoesRecurso = new AplicacaoRecurso[0];
-        id = Sincronizador.getNovoId();
+        id = (ComposicaoHistoria.historia.trechos.Length  + 1).ToString();
         criaAplicacaoTexto("");
     }
 
