@@ -22,14 +22,20 @@ public class LayoutHistoria : MonoBehaviour
     public InputField atualizadorTextos;
     public int id;
 
-    public Historia historia;
+    public GameObject visualizadorDetalhes;
+    public InputField nomeHistoria;
+    public InputField descricaoHistoria;
+    public InputField autorHistoria;
 
+    public Historia historia;
+    public bool detalhesAtivo;
+
+    public Transform posicaoDetalhesAtivo, posicaoDetalhesInativo;
 
     // Use this for initialization
     void Start()
     {
-        tela = GameObject.FindObjectOfType<Canvas>();
-        Sincronizador.carregar();
+        tela = GameObject.FindObjectOfType<Canvas>(); 
         controladorCamera = GameObject.FindObjectOfType<ControladorCamera>();
         carregarHistoria();
     }
@@ -65,6 +71,8 @@ public class LayoutHistoria : MonoBehaviour
     {
         historia = Sincronizador.carregarHistoria();
         ComposicaoHistoria.historia = historia;
+
+        mostraDetalhes();
         montarDiagrama();
     }
 
@@ -81,6 +89,22 @@ public class LayoutHistoria : MonoBehaviour
             listaTrechos.Add(trecho);
         }
         ComposicaoHistoria.historia.trechos = listaTrechos.ToArray();
+
+        gravaDetalhes();
+    }
+
+    public void mostraDetalhes(){
+        
+        nomeHistoria.text = historia.nome;
+        descricaoHistoria.text = historia.descricao;
+        autorHistoria.text = historia.autor;
+    }
+    
+    public void gravaDetalhes(){
+        //detalhes
+        ComposicaoHistoria.historia.nome = nomeHistoria.textComponent.text;
+        ComposicaoHistoria.historia.descricao = descricaoHistoria.textComponent.text;
+        ComposicaoHistoria.historia.autor = autorHistoria.textComponent.text;
     }
 
     public void montarDiagrama()
@@ -118,6 +142,15 @@ public class LayoutHistoria : MonoBehaviour
     {
         trechoSelecionado1.trecho.setResumo(atualizadorTextos.text);
         trechoSelecionado1.resumo.text = atualizadorTextos.text;
+    }
+
+    public void alternarDetalhes(){
+        detalhesAtivo = !detalhesAtivo;
+        if(detalhesAtivo){
+            visualizadorDetalhes.transform.position = posicaoDetalhesAtivo.position;
+        }else{
+            visualizadorDetalhes.transform.position = posicaoDetalhesInativo.position;
+        }
     }
 
     public bool apenasUmSelecionado()

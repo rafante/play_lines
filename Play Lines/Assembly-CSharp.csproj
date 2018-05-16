@@ -65,6 +65,7 @@
      <Compile Include="Assets\Modern UI Pack\Scripts\ToggleAnim.cs" />
      <Compile Include="Assets\Scripts\Controladores\ControladorCamera.cs" />
      <Compile Include="Assets\Scripts\Controladores\ControladorCenas.cs" />
+     <Compile Include="Assets\Scripts\Controladores\DetalhesHistoria.cs" />
      <Compile Include="Assets\Scripts\Entidades\AplicacaoRecurso.cs" />
      <Compile Include="Assets\Scripts\Entidades\BalaoRepresentacao.cs" />
      <Compile Include="Assets\Scripts\Entidades\Classificacao.cs" />
@@ -89,7 +90,9 @@
      <Compile Include="Assets\Scripts\Sincronizacao\Historias.cs" />
      <Compile Include="Assets\Scripts\Sincronizacao\Sincronizador.cs" />
      <Compile Include="Assets\Scripts\Sincronizacao\Trechos.cs" />
+     <Compile Include="Assets\Scripts\UI\ItemHistoria.cs" />
      <Compile Include="Assets\Scripts\Uteis\TipoConexao.cs" />
+     <Compile Include="Assets\Simple Vector Icons\Sample\IconPreview.cs" />
      <Compile Include="Assets\UIGraph\Scripts\Connection.cs" />
      <Compile Include="Assets\UIGraph\Scripts\ConnectionManager.cs" />
      <Compile Include="Assets\UIGraph\Scripts\ConnectionPoint.cs" />

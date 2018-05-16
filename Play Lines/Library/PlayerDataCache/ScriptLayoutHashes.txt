@@ -5,7 +5,7 @@ SceneListBegin?
 Assets/Scenes/menu_principal.unity
 Assets/Scenes/layout_historia.unity
 Assets/Scenes/edita_trecho.unity
-Assets/Scenes/ver_trecho.unity
+Assets/Scenes/jogar.unity
 SceneListEnd?
 d140669f5ac9b9483b739e230114c862 Assembly-CSharp.dll:.LaunchURL
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.Timeline.dll:UnityEngine.Timeline.ActivationPlayableAsset
@@ -129,7 +129,7 @@ c2275a8bfbb9f9942cad75ecdfded41d UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.Spa
 76f60a66e37b0bef83bc187c89dcce26 Assembly-CSharp.dll:.DropdownItem
 c07371cd776f4d6a5a7cbfb59e0a6760 Assembly-CSharp.dll:.CustomInputField
 4162154c5be861f7ad57c5e97bb784a3 Assembly-CSharp.dll:.SwitchAnim
-3664698813c63ed5f8f846d687a705e6 Assembly-CSharp.dll:.LayoutHistoria
+671b2123d84c0139e00bc2fd7eb73758 Assembly-CSharp.dll:.LayoutHistoria
 92201e4e2609b1f642957438d012d62b Assembly-CSharp.dll:.PBFilled
 fc1e0f4d8439d9928083474691511a13 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkAnimator
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.Networking.dll:UnityEngine.Networking.NetworkBehaviour
@@ -173,3 +173,6 @@ c2275a8bfbb9f9942cad75ecdfded41d UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.Spa
 4cfa1f25c33fdf06be6e1c191233ab54 Assembly-CSharp.dll:.SpinCamera
 db5b248ef8b491a6b6c641eb213898c7 Assembly-CSharp.dll:.ToggleAnim
 8ece37e7dead9396f9e7a77a9c84091a Assembly-CSharp.dll:.RadialSlider
+c349ae25e9973ecb14bfaee3767c05ab Assembly-CSharp.dll:.ItemHistoria
+76e06ba249210c5086ddfccdba52b57c Assembly-CSharp.dll:.IconPreview
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.DetalhesHistoria

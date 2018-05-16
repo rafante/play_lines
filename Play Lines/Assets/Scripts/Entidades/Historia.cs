@@ -9,6 +9,8 @@ public class Historia
 
     public string nome;
     public string descricao;
+    public string thumbnail;
+    public string autor;
     public Classificacao classificacao;
     public Tag[] tags;
     public Idioma[] idiomas;
