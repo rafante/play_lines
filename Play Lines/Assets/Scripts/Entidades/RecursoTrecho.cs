@@ -2,14 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using EnumsHistoria;
 
-[Serializable]
-public class Recurso
+namespace Entidades
 {
-    public TipoRecursoTrecho tipoRecurso;
-    public string valor;
+    [Serializable]
+    public class Recurso
+    {
+        public TipoRecursoTrecho tipoRecurso;
+        public string valor;
 
-    public Recurso(TipoRecursoTrecho tipo){
-        tipoRecurso = tipo;
+        public Recurso(TipoRecursoTrecho tipo)
+        {
+            tipoRecurso = tipo;
+        }
     }
 }

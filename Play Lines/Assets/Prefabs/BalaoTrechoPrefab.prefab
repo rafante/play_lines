@@ -40,6 +40,7 @@ GameObject:
   - component: {fileID: 114323046461893216}
   - component: {fileID: 114765363741939656}
   - component: {fileID: 114955816623376770}
+  - component: {fileID: 114652385804044872}
   m_Layer: 5
   m_Name: BalaoTrechoPrefab
   m_TagString: Untagged
@@ -151,6 +152,19 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Button
+--- !u!114 &114652385804044872
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1417010616492290}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1741964061, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalFit: 1
+  m_VerticalFit: 2
 --- !u!114 &114765363741939656
 MonoBehaviour:
   m_ObjectHideFlags: 1

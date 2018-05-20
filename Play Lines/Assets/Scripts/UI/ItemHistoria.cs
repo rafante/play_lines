@@ -1,33 +1,47 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Entidades;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class ItemHistoria : MonoBehaviour {
+namespace UI
+{
+    public class ItemHistoria : MonoBehaviour
+    {
 
-	public Historia historia;
+        public Historia historia;
 
-	public Sprite _thumbnailBuffer;
-	public Image thumbnail;
-	public Text nome;
-	public Text descricao;
-	public Text autor;
+        public Image thumbnail;
+        public Text nome;
+        public Text descricao;
+        public Text autor;
 
-	// Use this for initialization
-	void Start () {
-		historia = Sincronizador.carregarHistoria();
-		atualizaUI();
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+        // Use this for initialization
+        void Start()
+        {
+            carregarFuncaoBotao();
+        }
 
-	public void atualizaUI(){
-		thumbnail.sprite = _thumbnailBuffer;
-		nome.text = historia.nome;
-		descricao.text = historia.descricao;
-		autor.text = historia.autor;
-	}
+        public void carregarFuncaoBotao(){
+            Button botao = gameObject.GetComponent<Button>();
+            botao.onClick.AddListener(delegate(){
+                SceneManager.LoadScene("jogar");
+            });
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+
+        }
+
+        public void atualizaUI()
+        {
+            thumbnail.sprite = Recursos.imagens[historia.thumbnail];
+            nome.text = historia.nome;
+            descricao.text = historia.descricao;
+            autor.text = historia.autor;
+        }
+    }
 }

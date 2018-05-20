@@ -1,6 +1,9 @@
 ﻿using System;
 
-public enum TipoTrecho
+namespace EnumsHistoria
 {
-	INICIO, NORMAL, FIM, QUEBRA
+    public enum TipoTrecho
+    {
+        INICIO, NORMAL, FIM, QUEBRA
+    }
 }

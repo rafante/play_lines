@@ -1,6 +1,10 @@
 using System;
 
-[Serializable]
-public class Idioma{
-    
+namespace Entidades
+{
+    [Serializable]
+    public class Idioma
+    {
+
+    }
 }

@@ -1,6 +1,11 @@
 using System;
+using EnumsHistoria;
 
-[Serializable]
-public class Classificacao{
-    public ClassificacaoEtaria faixaEtaria;
+namespace Entidades
+{
+    [Serializable]
+    public class Classificacao
+    {
+        public ClassificacaoEtaria faixaEtaria;
+    }
 }

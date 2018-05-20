@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum TipoRecursoTrecho {
-	TEXTO, IMAGEM, SOM, MUSICA
+namespace EnumsHistoria
+{
+    public enum TipoRecursoTrecho
+    {
+        TEXTO, IMAGEM, SOM, MUSICA
+    }
 }

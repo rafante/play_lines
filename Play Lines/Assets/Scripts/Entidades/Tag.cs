@@ -1,6 +1,10 @@
 using System;
 
-[Serializable]
-public class Tag{
-    
+namespace Entidades
+{
+    [Serializable]
+    public class Tag
+    {
+
+    }
 }

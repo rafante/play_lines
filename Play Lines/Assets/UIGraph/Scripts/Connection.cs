@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Renderizacao;
+using UnityEngine;
 
 [RequireComponent(typeof(LineRenderer)), ExecuteInEditMode]
 public class Connection : MonoBehaviour {
