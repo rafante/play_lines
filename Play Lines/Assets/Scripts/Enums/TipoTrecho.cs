@@ -4,6 +4,6 @@ namespace EnumsHistoria
 {
     public enum TipoTrecho
     {
-        INICIO, NORMAL, FIM, QUEBRA
+        NORMAL, CHAT_CELULAR, MINIGAME
     }
 }

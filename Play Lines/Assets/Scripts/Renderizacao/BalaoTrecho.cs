@@ -22,7 +22,7 @@ namespace Renderizacao
         public Text resumo;
         public Image borda;
         public bool dragging;
-        public string balaoId { get { return trecho.id; } }
+        public int balaoId { get { return trecho.ordem; } }
 
         // Use this for initialization
         void Awake()
@@ -71,26 +71,26 @@ namespace Renderizacao
 
         public bool ehPai(BalaoTrecho balaoPai)
         {
-            var pais = new List<string>(trecho.pais);
-            return pais.Contains(balaoPai.trecho.id);
+            var pais = new List<int>(trecho.pais);
+            return pais.Contains(balaoPai.trecho.ordem);
         }
 
         public void adicionaPai(BalaoTrecho balaoPai)
         {
             if (!balaoPai.ehPai(this))
             {
-                var pais = new List<string>(trecho.pais);
-                pais.Add(balaoPai.trecho.id);
+                var pais = new List<int>(trecho.pais);
+                pais.Add(balaoPai.trecho.ordem);
                 trecho.pais = pais.ToArray();
             }
         }
 
         public void removerPai(BalaoTrecho balaoPai)
         {
-            var pais = new List<string>(trecho.pais);
-            if (pais.Contains(balaoPai.trecho.id))
+            var pais = new List<int>(trecho.pais);
+            if (pais.Contains(balaoPai.trecho.ordem))
             {
-                pais.Remove(balaoPai.trecho.id);
+                pais.Remove(balaoPai.trecho.ordem);
                 trecho.pais = pais.ToArray();
             }
         }

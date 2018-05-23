@@ -13,6 +13,8 @@ namespace Entidades
         public Recurso recurso;
         public Vector2 posicao;
         public Vector2 dimensoes;
+        public string cor;
+        public string fonte;
         public float duracao;
         public float inicio;
         public float fim;

@@ -30,7 +30,9 @@ namespace Renderizacao
         public GameObject visualizadorDetalhes;
         public InputField nomeHistoria;
         public InputField descricaoHistoria;
+        public InputField thumbnailHistoria;
         public InputField autorHistoria;
+        public Image fundoPreto;
 
         public Historia historia;
         public bool detalhesAtivo;
@@ -52,14 +54,14 @@ namespace Renderizacao
 
         void controlaCorBorda()
         {
-            string trecho1 = trechoSelecionado1 != null ? trechoSelecionado1.trecho.id : null;
-            string trecho2 = trechoSelecionado2 != null ? trechoSelecionado2.trecho.id : null;
+            int trecho1 = trechoSelecionado1 != null ? trechoSelecionado1.trecho.ordem : -1;
+            int trecho2 = trechoSelecionado2 != null ? trechoSelecionado2.trecho.ordem : -1;
 
             foreach (BalaoTrecho balao in arrayTrechos)
             {
-                if (trecho1 != null && trecho1 == balao.trecho.id)
+                if (trecho1 >= 0 && trecho1 == balao.trecho.ordem)
                     balao.borda.color = corTrecho1;
-                else if (trecho2 != null && trecho2 == balao.trecho.id)
+                else if (trecho2 >= 0 && trecho2 == balao.trecho.ordem)
                     balao.borda.color = corTrecho2;
                 else
                     balao.borda.color = corNaoSelecionado;
@@ -103,6 +105,7 @@ namespace Renderizacao
 
             nomeHistoria.text = historia.nome;
             descricaoHistoria.text = historia.descricao;
+            thumbnailHistoria.text = historia.thumbnail;
             autorHistoria.text = historia.autor;
         }
 
@@ -111,6 +114,7 @@ namespace Renderizacao
             //detalhes
             ComposicaoHistoria.historia.nome = nomeHistoria.textComponent.text;
             ComposicaoHistoria.historia.descricao = descricaoHistoria.textComponent.text;
+            ComposicaoHistoria.historia.thumbnail = thumbnailHistoria.textComponent.text;
             ComposicaoHistoria.historia.autor = autorHistoria.textComponent.text;
         }
 
@@ -157,10 +161,12 @@ namespace Renderizacao
             if (detalhesAtivo)
             {
                 visualizadorDetalhes.transform.position = posicaoDetalhesAtivo.position;
+                fundoPreto.enabled = true;
             }
             else
             {
                 visualizadorDetalhes.transform.position = posicaoDetalhesInativo.position;
+                fundoPreto.enabled = false;
             }
         }
 
@@ -233,6 +239,7 @@ namespace Renderizacao
 
         public void alternarAtualizador(bool ativar)
         {
+            atualizadorTextos.textComponent.text = "";
             if (ativar)
                 atualizadorTextos.textComponent.text = trechoSelecionado1.trecho.getResumoStr();
             atualizadorTextos.gameObject.SetActive(ativar);
@@ -255,7 +262,8 @@ namespace Renderizacao
         public BalaoTrecho novoBalaoTrecho()
         {
             BalaoTrecho novoBalao = Instantiate(prefabBalaoTrecho) as BalaoTrecho;
-            novoBalao.trecho = new Trecho(TipoTrecho.INICIO);
+            novoBalao.trecho = new Trecho(TipoTrecho.NORMAL);
+            novoBalao.trecho.ordem = historia.trechos.Length + 1;
             novoBalao.transform.SetParent(tela.transform);
             novoBalao.transform.localScale = Vector3.one;
             novoBalao.transform.localPosition = Vector3.zero;
@@ -267,11 +275,11 @@ namespace Renderizacao
             limpaConexoes();
             foreach (var balao in arrayTrechos)
             {
-                foreach (string pai in balao.trecho.pais)
+                foreach (int pai in balao.trecho.pais)
                 {
                     foreach (var bal in arrayTrechos)
                     {
-                        if (bal.trecho.id == pai)
+                        if (bal.trecho.ordem == pai)
                         {
                             ConnectionManager.criaConexao(balao.gameObject, bal.gameObject);
                             break;

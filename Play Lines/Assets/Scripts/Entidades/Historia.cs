@@ -24,6 +24,37 @@ namespace Entidades
             return nome + ":" + autor;
         }
 
+        public List<Trecho> filhosDoTrecho(Trecho trecho){
+            List<Trecho> filhos = new List<Trecho>();
+            foreach(var possivelFilho in trechos){
+                if(possivelFilho.ordem == trecho.ordem)
+                continue;
+                foreach(var pai in possivelFilho.pais){
+                    if(pai == trecho.ordem){
+                        filhos.Add(possivelFilho);
+                        break;
+                    }
+                }
+            }
+            return filhos;
+        }
+
+        public List<Trecho> paisDoTrecho(Trecho trecho){
+            var pais = new List<Trecho>();
+            foreach(var pai in trecho.pais){
+                pais.Add(trechoPelaOrdem(pai));
+            }
+            return pais;
+        }
+
+        public Trecho trechoPelaOrdem(int ordem){
+            foreach(var trecho in trechos){
+                if(trecho.ordem == ordem)
+                    return trecho;
+            }
+            return null;
+        }
+
         private Trecho[] _iniciosBuffer, _finsBuffer, _normaisBuffer, _quebrasBuffer;
 
         // public bool testarHistoria()
@@ -54,117 +85,6 @@ namespace Entidades
                 trechosPorNivel[nivel].Add(trecho);
             }
             return trechosPorNivel;
-        }
-
-        public Trecho[] getInicios()
-        {
-            atualizaBuffers();
-            return _iniciosBuffer;
-        }
-
-        public Trecho[] getNomais()
-        {
-            atualizaBuffers();
-            return _normaisBuffer;
-        }
-
-        public Trecho[] getFins()
-        {
-            atualizaBuffers();
-            return _finsBuffer;
-        }
-
-        public Trecho[] getQuebras()
-        {
-            atualizaBuffers();
-            return _quebrasBuffer;
-        }
-
-        public void atualizaBuffers()
-        {
-            limpaBuffers();
-
-            foreach (Trecho trecho in trechos)
-            {
-                switch (trecho.tipoTrecho)
-                {
-                    case TipoTrecho.INICIO:
-                        Array.Resize<Trecho>(ref _iniciosBuffer, _iniciosBuffer.Length + 1);
-                        _iniciosBuffer[_iniciosBuffer.Length - 1] = trecho;
-                        break;
-                    case TipoTrecho.FIM:
-                        Array.Resize<Trecho>(ref _finsBuffer, _finsBuffer.Length + 1);
-                        _finsBuffer[_finsBuffer.Length - 1] = trecho;
-                        break;
-                    case TipoTrecho.NORMAL:
-                        Array.Resize<Trecho>(ref _normaisBuffer, _normaisBuffer.Length + 1);
-                        _normaisBuffer[_normaisBuffer.Length - 1] = trecho;
-                        break;
-                    case TipoTrecho.QUEBRA:
-                        Array.Resize<Trecho>(ref _quebrasBuffer, _quebrasBuffer.Length + 1);
-                        _quebrasBuffer[_quebrasBuffer.Length - 1] = trecho;
-                        break;
-                }
-            }
-        }
-
-        public void limpaBuffers()
-        {
-            _iniciosBuffer = _finsBuffer = _normaisBuffer = _quebrasBuffer = null;
-            _iniciosBuffer = _finsBuffer = _normaisBuffer = _quebrasBuffer = new Trecho[0];
-        }
-
-        public bool temAoMenosUmInicio()
-        {
-            return _iniciosBuffer.Length > 0;
-        }
-
-        public bool temAoMenosUmFim()
-        {
-            return _finsBuffer.Length > 0;
-        }
-
-        // public bool trechosLevamAUmFim()
-        // {
-        //     foreach (Trecho trecho in trechos)
-        //     {
-        //         if (!trechoLevaAUmFim(trecho))
-        //             return false;
-        //     }
-        //     return true;
-        // }
-
-        // public bool trechoLevaAUmFim(Trecho trecho)
-        // {
-
-        //     bool levaAUmFim = true;
-
-        //     //Se o trecho é um fim retorna true;
-        //     if (trechoEUmFim(trecho))
-        //         return true;
-
-        //     //Se só tem um filho e ele é um fim, retorna verdadeiro
-        //     if (trecho.filhos.Length == 1 && trechoEUmFim(trecho.filhos[0]))
-        //         return true;
-
-        //     //Se não tem nenhum filho e não é um fim ou quebra, retorna falso
-        //     if (trecho.filhos.Length == 0)
-        //         return false;
-
-        //     //Se o trecho não leva diretamente a um fim ou é um fim,
-        //     //checa os filhos recursivamente
-        //     foreach (Trecho filho in trecho.filhos)
-        //     {
-        //         levaAUmFim &= trechoLevaAUmFim(filho);
-        //     }
-
-        //     return levaAUmFim;
-        // }
-
-        //Retorna verdadeiro se o trecho é um fim (FIM ou QUEBRA)
-        public bool trechoEUmFim(Trecho trecho)
-        {
-            return trecho.tipoTrecho == TipoTrecho.FIM || trecho.tipoTrecho == TipoTrecho.QUEBRA;
         }
 
     }

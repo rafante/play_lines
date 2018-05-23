@@ -52,7 +52,6 @@ namespace Sincronizacao
         public static void carregarHistorias()
         {
             historiasStr = PlayerPrefs.GetString("historias");
-            Debug.Log("Carregando historias: " + historiasStr);
 
             if (historiasStr == null || historiasStr == "")
             {
@@ -69,7 +68,6 @@ namespace Sincronizacao
         public static void salvarHistorias()
         {
             historiasStr = JsonUtility.ToJson(historiasArray);
-            Debug.Log("persistindo: " + historiasStr);
 			PlayerPrefs.SetString("historias", historiasStr);
             PlayerPrefs.Save();
         }
@@ -103,7 +101,7 @@ namespace Sincronizacao
             int maior = 0;
             foreach (Trecho trecho in ComposicaoHistoria.historia.trechos)
             {
-                int trechoId = int.Parse(trecho.id);
+                int trechoId = trecho.ordem;
                 if (trechoId > maior)
                 {
                     maior = trechoId;

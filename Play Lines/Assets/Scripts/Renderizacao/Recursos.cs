@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using Entidades;
+using EnumsHistoria;
 using Sincronizacao;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,29 +10,17 @@ public class Recursos : MonoBehaviour
 {
 
     public static Dictionary<string, Sprite> imagens = new Dictionary<string, Sprite>();
+    public static Dictionary<string, AudioClip> sons = new Dictionary<string, AudioClip>();
+    public static Dictionary<string, Font> fontes = new Dictionary<string, Font>();
+
 
     // Use this for initialization
     void Awake()
-    {
-        // criaHistoria();
-        DontDestroyOnLoad(gameObject);
+    {        
+        // DontDestroyOnLoad(gameObject);
         carregarImagens();
-    }
-
-    public void criaHistoria(){
-        Historia historia = new Historia();
-        historia.nome = "Pânico na estrada";
-        historia.descricao = "Uma família viajando a noite por uma estrada deserta e um estranho aparece no caminho.";
-        historia.autor = "rafante2";
-        historia.thumbnail = "estrada_floresta_noite";
-        Sincronizador.salvarHistoria(historia, true);
-
-        Historia historia2 = new Historia();
-        historia2.nome = "Pânico na estrada 2";
-        historia2.descricao = "Continuação: Uma família viajando a noite por uma estrada deserta e um estranho aparece no caminho.";
-        historia2.autor = "rafante2";
-        historia2.thumbnail = "timer";
-        Sincronizador.salvarHistoria(historia2, true);
+        carregarSons();
+        carregarFontes();
     }
 
     public void carregarImagens()
@@ -43,6 +32,28 @@ public class Recursos : MonoBehaviour
                 imagens.Add(imagem.name, imagem);
             else
                 imagens[imagem.name] = imagem;
+        }
+    }
+
+    public void carregarSons()
+    {
+        AudioClip[] sonsLista = Resources.LoadAll<AudioClip>("Sons");
+        foreach (var som in sonsLista)
+        {
+            if (!sons.ContainsKey(som.name))
+                sons.Add(som.name, som);
+            else
+                sons[som.name] = som;
+        }
+    }
+
+    public void carregarFontes(){
+        Font[] fontesList = Resources.LoadAll<Font>("Fontes");
+        foreach(var fonte in fontesList){
+            if(!fontes.ContainsKey(fonte.name))
+                fontes.Add(fonte.name, fonte);
+            else
+                fontes[fonte.name] = fonte;
         }
     }
 }

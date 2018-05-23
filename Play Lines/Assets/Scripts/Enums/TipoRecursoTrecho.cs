@@ -6,6 +6,6 @@ namespace EnumsHistoria
 {
     public enum TipoRecursoTrecho
     {
-        TEXTO, IMAGEM, SOM, MUSICA
+        TEXTO, IMAGEM, FUNDO, SOM, MUSICA
     }
 }

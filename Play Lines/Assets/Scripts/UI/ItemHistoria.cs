@@ -23,9 +23,12 @@ namespace UI
             carregarFuncaoBotao();
         }
 
-        public void carregarFuncaoBotao(){
+        public void carregarFuncaoBotao()
+        {
             Button botao = gameObject.GetComponent<Button>();
-            botao.onClick.AddListener(delegate(){
+            ComposicaoHistoria.historia = historia;
+            botao.onClick.AddListener(delegate ()
+            {
                 SceneManager.LoadScene("jogar");
             });
         }
@@ -38,7 +41,8 @@ namespace UI
 
         public void atualizaUI()
         {
-            thumbnail.sprite = Recursos.imagens[historia.thumbnail];
+            if (historia.thumbnail != null && historia.thumbnail != "")
+                thumbnail.sprite = Recursos.imagens[historia.thumbnail];
             nome.text = historia.nome;
             descricao.text = historia.descricao;
             autor.text = historia.autor;

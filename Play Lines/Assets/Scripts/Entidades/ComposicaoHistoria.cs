@@ -14,11 +14,11 @@ namespace Entidades
             return historia;
         }
 
-        public static Trecho trecho(string id)
+        public static Trecho trecho(int ordem)
         {
             foreach (Trecho trecho in trechos)
             {
-                if (trecho.id.Equals(id))
+                if (trecho.ordem == ordem)
                     return trecho;
             }
             return null;
