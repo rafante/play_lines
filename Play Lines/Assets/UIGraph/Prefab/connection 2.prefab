@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 12022754}
   - component: {fileID: 11479312}
   m_Layer: 0
-  m_Name: None <> None
+  m_Name: connection 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45,11 +45,11 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   points:
-  - color: {r: 1, g: 1, b: 1, a: 1}
+  - color: {r: 1, g: 0, b: 0, a: 1}
     direction: 0
     position: 0
     weight: 1
-  - color: {r: 0.047169805, g: 0.044722315, b: 0.044722315, a: 1}
+  - color: {r: 0.0040984154, g: 0, b: 1, a: 1}
     direction: 2
     position: 0
     weight: 1

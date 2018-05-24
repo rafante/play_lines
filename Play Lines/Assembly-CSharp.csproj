@@ -106,6 +106,13 @@
      <Compile Include="Assets\UIGraph\Scripts\Util\ObfuscateObject.cs" />
      <Compile Include="Assets\UIGraph\Scripts\Util\ObfuscateText.cs" />
      <Compile Include="Assets\UIGraph\Scripts\Util\SpinCamera.cs" />
+     <Compile Include="Assets\UITween\Prefabs\Click Effect Pref\ClickedWaveAnimation.cs" />
+     <Compile Include="Assets\UITween\ScenesExamplesScripts\ActivateOnEnable.cs" />
+     <Compile Include="Assets\UITween\ScenesExamplesScripts\CreateAnimImage.cs" />
+     <Compile Include="Assets\UITween\ScenesExamplesScripts\FollowClick.cs" />
+     <Compile Include="Assets\UITween\Scripts\EasyTween.cs" />
+     <Compile Include="Assets\UITween\Scripts\ReferencedFrom.cs" />
+     <Compile Include="Assets\UITween\Scripts\UITween.cs" />
      <None Include="Assets\Modern UI Pack\Licence.txt" />
      <None Include="Assets\Modern UI Pack\Read Me.txt" />
  <Reference Include="UnityEditor.StandardEvents">

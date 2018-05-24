@@ -75,7 +75,7 @@ public class ConnectionManager : MonoBehaviour {
     /// </summary>
     void OnGUI()
     {
-		CleanConnections();
+		//CleanConnections();
     }
 
     public void removeConexoesInvalidas()

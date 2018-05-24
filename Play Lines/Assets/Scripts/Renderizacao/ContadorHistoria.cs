@@ -30,7 +30,7 @@ public class ContadorHistoria : MonoBehaviour
     void Start()
     {
         historia = ComposicaoHistoria.historia;
-        trechoAtual = historia.trechos[0];
+        trechoAtual = historia.getInicio();
         renderizaTrechoAtual();
         proximoTrecho.GetComponent<Button>().onClick.AddListener(delegate
         {

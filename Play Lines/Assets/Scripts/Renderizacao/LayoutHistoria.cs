@@ -187,7 +187,6 @@ namespace Renderizacao
 
             if (apenasUmSelecionado())
             {
-                trechoSelecionado1.trecho.setPai(balao.trecho);
                 novaPosicao.x = trechoSelecionado1.trecho.representacao.posicao.x;
                 novaPosicao.y = trechoSelecionado1.trecho.representacao.posicao.y - balao.altura - 10;
             }
@@ -281,7 +280,12 @@ namespace Renderizacao
                     {
                         if (bal.trecho.ordem == pai)
                         {
-                            ConnectionManager.criaConexao(balao.gameObject, bal.gameObject);
+                            var t1 = balao.GetComponent<RectTransform>();
+                            var t2 = bal.GetComponent<RectTransform>();
+
+                            var conexao = ConnectionManager.FindConnection(t1, t2);
+                            if (conexao == null)
+                                ConnectionManager.criaConexao(balao.gameObject, bal.gameObject);
                             break;
                         }
                     }
@@ -291,11 +295,12 @@ namespace Renderizacao
 
         public void limpaConexoes()
         {
+            ConnectionManager.CleanConnections();
             Connection[] conexoes = GameObject.FindObjectsOfType<Connection>();
             int numero = conexoes.Length;
             for (int i = 0; i < numero; i++)
             {
-                DestroyImmediate(conexoes[i]);
+                DestroyImmediate(conexoes[i].gameObject);
             }
         }
 
@@ -315,18 +320,27 @@ namespace Renderizacao
         {
             if (trechoSelecionado1 != null && trechoSelecionado2 != null)
             {
-                bool relacionar = !trechoSelecionado1.ehPai(trechoSelecionado2);
-                if (relacionar)
+                bool relacionar = !(trechoSelecionado1.pais.Contains(trechoSelecionado2.balaoId) ||
+                                     trechoSelecionado2.pais.Contains(trechoSelecionado1.balaoId));
+
+                var t1 = trechoSelecionado1.GetComponent<RectTransform>();
+                var t2 = trechoSelecionado2.GetComponent<RectTransform>();
+
+                if (!relacionar)
                 {
-                    trechoSelecionado1.adicionaPai(trechoSelecionado2);
-                    var conexao = ConnectionManager.criaConexao(trechoSelecionado1.gameObject, trechoSelecionado2.gameObject);
+                    trechoSelecionado1.removerPai(trechoSelecionado2);
+                    trechoSelecionado2.removerPai(trechoSelecionado1);
+                    // var conexao = ConnectionManager.FindConnection(t1, t2);
+                    // ConnectionManager.RemoveConnection(conexao);
+                    // DestroyImmediate(conexao);
                 }
                 else
                 {
-                    trechoSelecionado1.removerPai(trechoSelecionado2);
-                    ConnectionManager.CleanConnections();
+                    trechoSelecionado2.adicionaPai(trechoSelecionado1);
+                    // ConnectionManager.CreateConnection(t1, t2);
                 }
 
+                atualizaConexoes();
 
             }
         }

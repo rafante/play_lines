@@ -33,6 +33,6 @@ public class NotificationExample : MonoBehaviour {
 
 		notificationAnimator.Play (animationNameIn);
 		notificationAnimator.Play (animationNameOut);
-	
 	}
+	
 }

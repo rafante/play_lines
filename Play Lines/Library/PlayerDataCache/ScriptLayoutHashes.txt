@@ -150,7 +150,7 @@ e9bdabf9265d758d56f01bb188916fa8 UnityEngine.Networking.dll:UnityEngine.Networki
 3f32f08a64daf40b09ed864d96fe3840 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransform
 73843688b51256aed059f049c540bca8 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransformChild
 528ea1fd7c01796fc60c4e2f172ea229 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransformVisualizer
-6033ce915778278cdcb19ffd74056431 Assembly-CSharp.dll:Renderizacao.BalaoTrecho
+589ee52f7ac401e17b60d7a4f2fba03b Assembly-CSharp.dll:Renderizacao.BalaoTrecho
 964a1099224c520bf4ae8c8882fd80e3 Assembly-CSharp.dll:.ConnectionManager
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.TestRunner.dll:UnityEngine.TestTools.TestRunner.Callbacks.PlayModeRunnerCallback
 f02726adeff0a3ec5905565234b372da UnityEngine.TestRunner.dll:UnityEngine.TestTools.TestRunner.PlaymodeTestsController
@@ -180,3 +180,9 @@ c2275a8bfbb9f9942cad75ecdfded41d UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.Spa
 db5b248ef8b491a6b6c641eb213898c7 Assembly-CSharp.dll:.ToggleAnim
 8ece37e7dead9396f9e7a77a9c84091a Assembly-CSharp.dll:.RadialSlider
 c79720a38882fe5b2248f51465443a7a Assembly-CSharp.dll:UI.ListaHistorias
+c3d8adcb36209e5fbbd0e2853796c200 Assembly-CSharp.dll:.EasyTween
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.ReferencedFrom
+33950fda101d9867a142de9ba2130564 Assembly-CSharp.dll:.ActivateOnEnable
+349e86c07694b51ab970aa3759fb4294 Assembly-CSharp.dll:.ClickedWaveAnimation
+6a479c54bc1c8bd38883709ae7ea017f Assembly-CSharp.dll:.CreateAnimImage
+5ec42765f6075953cbe3d5b094cacbf8 Assembly-CSharp.dll:.FollowClick

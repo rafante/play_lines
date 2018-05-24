@@ -39,6 +39,15 @@ namespace Entidades
             return filhos;
         }
 
+        public Trecho getInicio()
+        {
+            foreach(Trecho trecho in trechos){
+                if(paisDoTrecho(trecho).Count == 0)
+                    return trecho;
+            }
+            return trechos[0];
+        }
+
         public List<Trecho> paisDoTrecho(Trecho trecho){
             var pais = new List<Trecho>();
             foreach(var pai in trecho.pais){

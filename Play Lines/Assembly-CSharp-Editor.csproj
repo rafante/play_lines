@@ -57,6 +57,7 @@
      <Compile Include="Assets\UIGraph\Editor\ConnectionPointDrawer.cs" />
      <Compile Include="Assets\UIGraph\Editor\GraphNodeEditor.cs" />
      <Compile Include="Assets\UIGraph\Editor\UIGraphUtilities.cs" />
+     <Compile Include="Assets\UITween\Editor\EditorUITween.cs" />
  <Reference Include="UnityEditor.StandardEvents">
  <HintPath>C:/dev/unity/play_lines/Play Lines/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
  </Reference>

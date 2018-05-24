@@ -20,9 +20,11 @@ namespace Renderizacao
         private RectTransform retangulo;
         public LayoutHistoria layoutHistoria;
         public Text resumo;
+        public Text ordem;
         public Image borda;
         public bool dragging;
         public int balaoId { get { return trecho.ordem; } }
+        public List<int> pais { get { return new List<int>(trecho.pais); } }
 
         // Use this for initialization
         void Awake()
@@ -63,8 +65,8 @@ namespace Renderizacao
             var posicaoAtual = retangulo.position;
             //Soma o delta (em x e em y) da movimentação na posição do componente
             //RectTransform do objeto
-            posicaoAtual.x += (dadosDoPonteiro.delta.x / 2);
-            posicaoAtual.y += (dadosDoPonteiro.delta.y / 2);
+            posicaoAtual.x += (dadosDoPonteiro.delta.x);
+            posicaoAtual.y += (dadosDoPonteiro.delta.y);
             retangulo.position = posicaoAtual;
             trecho.representacao.posicao = posicaoAtual;
         }
@@ -77,12 +79,12 @@ namespace Renderizacao
 
         public void adicionaPai(BalaoTrecho balaoPai)
         {
-            if (!balaoPai.ehPai(this))
+            var pais = new List<int>(trecho.pais);
+            if (!pais.Contains(balaoPai.balaoId))
             {
-                var pais = new List<int>(trecho.pais);
                 pais.Add(balaoPai.trecho.ordem);
-                trecho.pais = pais.ToArray();
             }
+            trecho.pais = pais.ToArray();
         }
 
         public void removerPai(BalaoTrecho balaoPai)
@@ -91,8 +93,8 @@ namespace Renderizacao
             if (pais.Contains(balaoPai.trecho.ordem))
             {
                 pais.Remove(balaoPai.trecho.ordem);
-                trecho.pais = pais.ToArray();
             }
+            trecho.pais = pais.ToArray();
         }
 
         public void OnEndDrag(PointerEventData eventData)
@@ -114,6 +116,7 @@ namespace Renderizacao
         public void atualizarBalao()
         {
             resumo.text = trecho.getResumoStr();
+            ordem.text = trecho.ordem.ToString();
         }
 
         //Atualiza o trecho com os dados do balão
