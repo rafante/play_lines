@@ -21,6 +21,7 @@ namespace Renderizacao
         public LayoutHistoria layoutHistoria;
         public Text resumo;
         public Text ordem;
+        public InputField condicao;
         public Image borda;
         public bool dragging;
         public int balaoId { get { return trecho.ordem; } }

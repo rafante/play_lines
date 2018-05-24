@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/menu_principal.unity
+- path: Assets/Scenes/jogar.unity
   isLoaded: 1
   isActive: 1

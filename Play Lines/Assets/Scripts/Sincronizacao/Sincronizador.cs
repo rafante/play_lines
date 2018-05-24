@@ -26,12 +26,21 @@ namespace Sincronizacao
         public static Historias historiasArray { get { return new Historias(historias.ToArray()); } }
         //public static Baloes baloes = new Baloes();
 
+
+        public static Historia buscaOuCriaHistoria()
+        {
+            carregarHistorias();
+            if (historias.Count == 0)
+                return new Historia();
+            return historias[0];
+        }
+
         public static Historia[] historiasPorCategoria(Categoria categoria, bool recarregar = true)
         {
             if (recarregar || historiasStr == null || historiasStr == "")
                 carregarHistorias();
             var historiasDaCategoria = historias;
-            if (categoria.tags.Length > 0);
+            if (categoria.tags.Length > 0) ;
             historiasDaCategoria = historiasDaCategoria.FindAll(delegate (Historia historia)
             {
                 return new List<Tag>(categoria.tags).TrueForAll(delegate (Tag tag)
@@ -68,7 +77,7 @@ namespace Sincronizacao
         public static void salvarHistorias()
         {
             historiasStr = JsonUtility.ToJson(historiasArray);
-			PlayerPrefs.SetString("historias", historiasStr);
+            PlayerPrefs.SetString("historias", historiasStr);
             PlayerPrefs.Save();
         }
 

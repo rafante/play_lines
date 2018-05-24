@@ -77,6 +77,7 @@ namespace Renderizacao
         public void carregarHistoria()
         {
             // historia = Sincronizador.carregarHistoria();
+            historia = Sincronizador.buscaOuCriaHistoria();
             ComposicaoHistoria.historia = historia;
 
             mostraDetalhes();
@@ -91,6 +92,7 @@ namespace Renderizacao
             {
                 balao.trecho.setResumo(balao.resumo.text);
                 balao.trecho.representacao.posicao = new Vector2(balao.transform.localPosition.x, balao.transform.localPosition.y);
+                balao.trecho.textoCondicao = balao.condicao.text;
 
                 var trecho = balao.trecho;
                 listaTrechos.Add(trecho);
@@ -128,6 +130,7 @@ namespace Renderizacao
                 var trecho = historia.trechos[i];
                 BalaoTrecho balao = novoBalaoTrecho();
                 balao.trecho = trecho;
+                balao.condicao.text = trecho.textoCondicao;
                 var transf = balao.GetComponent<RectTransform>();
 
                 Vector2 novaPosicao = transf.localPosition;
