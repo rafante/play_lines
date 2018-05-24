@@ -16,8 +16,8 @@ namespace Entidades
         public string autor;
         public Classificacao classificacao;
         public Tag[] tags;
-        public Idioma[] idiomas;
-        public Trecho[] trechos;
+        public Idioma[] idiomas = new Idioma[0];
+        public Trecho[] trechos = new Trecho[0];
 
         public string getId()
         {

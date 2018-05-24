@@ -17,6 +17,8 @@ public class Recursos : MonoBehaviour
     // Use this for initialization
     void Awake()
     {        
+        // PlayerPrefs.SetString("historias","");
+        // PlayerPrefs.Save();
         // DontDestroyOnLoad(gameObject);
         carregarImagens();
         carregarSons();
