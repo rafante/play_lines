@@ -39,12 +39,16 @@ namespace Renderizacao
 
         public Transform posicaoDetalhesAtivo, posicaoDetalhesInativo;
 
+        private BalaoTrecho _ultimoTrecho1 = null;
+
         // Use this for initialization
         void Start()
         {
+            historia = ComposicaoHistoria.historia;
             tela = GameObject.FindObjectOfType<Canvas>();
             controladorCamera = GameObject.FindObjectOfType<ControladorCamera>();
             carregarHistoria();
+            // StartCoroutine(carregarOnline());
         }
 
         void OnGUI()
@@ -74,11 +78,16 @@ namespace Renderizacao
             Sincronizador.salvarHistoria(ComposicaoHistoria.historia, true);
         }
 
+        IEnumerator carregarOnline()
+        {
+            Sincronizador.buscarNoServidor();
+            yield return new WaitUntil(() => true);
+            carregarHistoria();
+        }
+
         public void carregarHistoria()
         {
-            // historia = Sincronizador.carregarHistoria();
-            historia = Sincronizador.buscaOuCriaHistoria();
-            ComposicaoHistoria.historia = historia;
+            historia = ComposicaoHistoria.historia;
 
             mostraDetalhes();
             montarDiagrama();
@@ -131,6 +140,7 @@ namespace Renderizacao
                 BalaoTrecho balao = novoBalaoTrecho();
                 balao.trecho = trecho;
                 balao.condicao.text = trecho.textoCondicao;
+                balao.resumo.text = trecho.getResumoStr();
                 var transf = balao.GetComponent<RectTransform>();
 
                 Vector2 novaPosicao = transf.localPosition;
@@ -140,6 +150,11 @@ namespace Renderizacao
                 transf.localPosition = novaPosicao;
             }
             atualizaConexoes();
+        }
+
+        public void salvarNoServidor()
+        {
+            Sincronizador.salvarHistoriaOnline(historia);
         }
 
         public void limpaDiagrama()
@@ -154,8 +169,11 @@ namespace Renderizacao
 
         public void atualizaTextosDoTrechoSelecionado()
         {
-            trechoSelecionado1.trecho.setResumo(atualizadorTextos.text);
-            trechoSelecionado1.resumo.text = atualizadorTextos.text;
+            if (trechoSelecionado1 != null && trechoSelecionado2 == null)
+            {
+                trechoSelecionado1.trecho.setResumo(atualizadorTextos.text);
+                trechoSelecionado1.resumo.text = atualizadorTextos.text;
+            }
         }
 
         public void alternarDetalhes()
@@ -191,7 +209,7 @@ namespace Renderizacao
             if (apenasUmSelecionado())
             {
                 novaPosicao.x = trechoSelecionado1.trecho.representacao.posicao.x;
-                novaPosicao.y = trechoSelecionado1.trecho.representacao.posicao.y - balao.altura - 10;
+                novaPosicao.y = trechoSelecionado1.trecho.representacao.posicao.y - balao.altura - 45;
             }
             else
             {
@@ -205,6 +223,8 @@ namespace Renderizacao
 
         public void alternarBalao(BalaoTrecho balaoTrecho)
         {
+            if (balaoTrecho.arrastando)
+                return;
             bool ehOtrecho1 = trechoSelecionado1 != null && trechoSelecionado1 == balaoTrecho;
             bool ehOtrecho2 = trechoSelecionado2 != null && trechoSelecionado2 == balaoTrecho;
 
@@ -236,15 +256,27 @@ namespace Renderizacao
                 trechoSelecionado2 = null;
             }
 
+            if (trechoSelecionado1 != null && trechoSelecionado2 == null)
+            {
+                Camera cam = Camera.main;
+                Vector3 novaPosicao = trechoSelecionado1.transform.localPosition;
+                novaPosicao.z = -10;
+                cam.transform.localPosition = novaPosicao;
+                cam.transform.SetParent(null);
+            }
             alternarAtualizador(trechoSelecionado1 != null && trechoSelecionado2 == null);
         }
 
         public void alternarAtualizador(bool ativar)
         {
-            atualizadorTextos.textComponent.text = "";
-            if (ativar)
-                atualizadorTextos.textComponent.text = trechoSelecionado1.trecho.getResumoStr();
+            if (_ultimoTrecho1 == null || trechoSelecionado1 != _ultimoTrecho1 && trechoSelecionado1 != null)
+            {
+                _ultimoTrecho1 = trechoSelecionado1;
+                atualizadorTextos.text = trechoSelecionado1.trecho.getResumoStr();
+            }
+
             atualizadorTextos.gameObject.SetActive(ativar);
+            atualizaTextosDoTrechoSelecionado();
         }
 
         public void apagarBaloes()
@@ -344,7 +376,6 @@ namespace Renderizacao
                 }
 
                 atualizaConexoes();
-
             }
         }
 

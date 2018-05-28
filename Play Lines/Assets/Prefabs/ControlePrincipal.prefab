@@ -1,0 +1,137 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1479994483462176}
+  m_IsPrefabParent: 1
+--- !u!1 &1479994483462176
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4343172205618720}
+  - component: {fileID: 114879992342659698}
+  m_Layer: 0
+  m_Name: ControlePrincipal
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4343172205618720
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1479994483462176}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.2833011, y: 2.2691505, z: 90.03187}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114879992342659698
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1479994483462176}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bc4cdfbfdb4e9c4b9154d4e72a8bee3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jaOcorreu: 1
+  servidor: https://play-lines.herokuapp.com/
+  historiasTeste: "{      \"historias\":[         {            \"nome\":\"P\xE2nico
+    na estrada 4321\",          \"descricao\":\"Uma fam\xEDlia viajando de n\",          \"thumbnail\":\"woods\",
+    \         \"autor\":\"rafante\",          \"id\":\"5b0b2275a26a412ef4252166\",
+    \         \"classificacao\":{               \"faixaEtaria\":0          },          \"tags\":[
+    \            ],          \"idiomas\":[             ],          \"trechos\":[               {
+    \                 \"ordem\":3,                \"textoCondicao\":\"ou por aqui\",
+    \               \"tipoTrecho\":0,                \"pais\":[                     1
+    \               ],                \"representacao\":{                     \"posicao\":{
+    \                       \"x\":130.952392578125,                      \"y\":-269.0475769042969
+    \                  }                },                \"aplicacoesRecurso\":[
+    \                    {                        \"recurso\":{                           \"tipoRecurso\":0,
+    \                        \"valor\":\"Ou pra c\xE1\"                      },                      \"posicao\":{
+    \                          \"x\":-150.0,                         \"y\":-80.0                      },
+    \                     \"dimensoes\":{                           \"x\":300.0,                         \"y\":160.0
+    \                     },                      \"cor\":\"\",                      \"fonte\":\"\",
+    \                     \"duracao\":0.0,                      \"inicio\":0.0,                      \"fim\":0.0,
+    \                     \"loop\":false                   }                ]             },
+    \            {                  \"ordem\":2,                \"textoCondicao\":\"por
+    aqui\",                \"tipoTrecho\":0,                \"pais\":[                     1
+    \               ],                \"representacao\":{                     \"posicao\":{
+    \                       \"x\":-107.14286804199219,                      \"y\":-270.7771301269531
+    \                  }                },                \"aplicacoesRecurso\":[
+    \                    {                        \"recurso\":{                           \"tipoRecurso\":0,
+    \                        \"valor\":\"\\nDepois vem pra c\xE1\"                      },
+    \                     \"posicao\":{                           \"x\":-150.0,                         \"y\":-80.0
+    \                     },                      \"dimensoes\":{                           \"x\":300.0,
+    \                        \"y\":160.0                      },                      \"cor\":\"\",
+    \                     \"fonte\":\"\",                      \"duracao\":0.0,                      \"inicio\":0.0,
+    \                     \"fim\":0.0,                      \"loop\":false                   }
+    \               ]             },             {                  \"ordem\":1,                \"textoCondicao\":\"\",
+    \               \"tipoTrecho\":0,                \"pais\":[                   ],
+    \               \"representacao\":{                     \"posicao\":{                        \"x\":0.0,
+    \                     \"y\":0.0                   }                },                \"aplicacoesRecurso\":[
+    \                    {                        \"recurso\":{                           \"tipoRecurso\":0,
+    \                        \"valor\":\"Come\xE7a aqui\"                      },
+    \                     \"posicao\":{                           \"x\":-150.0,                         \"y\":-80.0
+    \                     },                      \"dimensoes\":{                           \"x\":300.0,
+    \                        \"y\":160.0                      },                      \"cor\":\"\",
+    \                     \"fonte\":\"\",                      \"duracao\":0.0,                      \"inicio\":0.0,
+    \                     \"fim\":0.0,                      \"loop\":false                   }
+    \               ]             }          ]       }, \t  {            \"nome\":\"P\xE2nico
+    na estrada 2315\",          \"descricao\":\"Uma fam\xEDlia viajando de n\",          \"thumbnail\":\"woods\",
+    \         \"autor\":\"rafante\",          \"id\":\"5b0b2302c548703750403615\",
+    \         \"classificacao\":{               \"faixaEtaria\":0          },          \"tags\":[
+    \            ],          \"idiomas\":[             ],          \"trechos\":[               {
+    \                 \"ordem\":3,                \"textoCondicao\":\"ou por aqui\",
+    \               \"tipoTrecho\":0,                \"pais\":[                     1
+    \               ],                \"representacao\":{                     \"posicao\":{
+    \                       \"x\":130.952392578125,                      \"y\":-269.0475769042969
+    \                  }                },                \"aplicacoesRecurso\":[
+    \                    {                        \"recurso\":{                           \"tipoRecurso\":0,
+    \                        \"valor\":\"Ou pra c\xE1\"                      },                      \"posicao\":{
+    \                          \"x\":-150.0,                         \"y\":-80.0                      },
+    \                     \"dimensoes\":{                           \"x\":300.0,                         \"y\":160.0
+    \                     },                      \"cor\":\"\",                      \"fonte\":\"\",
+    \                     \"duracao\":0.0,                      \"inicio\":0.0,                      \"fim\":0.0,
+    \                     \"loop\":false                   }                ]             },
+    \            {                  \"ordem\":2,                \"textoCondicao\":\"por
+    aqui\",                \"tipoTrecho\":0,                \"pais\":[                     1
+    \               ],                \"representacao\":{                     \"posicao\":{
+    \                       \"x\":-107.14286804199219,                      \"y\":-270.7771301269531
+    \                  }                },                \"aplicacoesRecurso\":[
+    \                    {                        \"recurso\":{                           \"tipoRecurso\":0,
+    \                        \"valor\":\"\\nDepois vem pra c\xE1\"                      },
+    \                     \"posicao\":{                           \"x\":-150.0,                         \"y\":-80.0
+    \                     },                      \"dimensoes\":{                           \"x\":300.0,
+    \                        \"y\":160.0                      },                      \"cor\":\"\",
+    \                     \"fonte\":\"\",                      \"duracao\":0.0,                      \"inicio\":0.0,
+    \                     \"fim\":0.0,                      \"loop\":false                   }
+    \               ]             },             {                  \"ordem\":1,                \"textoCondicao\":\"\",
+    \               \"tipoTrecho\":0,                \"pais\":[                   ],
+    \               \"representacao\":{                     \"posicao\":{                        \"x\":0.0,
+    \                     \"y\":0.0                   }                },                \"aplicacoesRecurso\":[
+    \                    {                        \"recurso\":{                           \"tipoRecurso\":0,
+    \                        \"valor\":\"Come\xE7a aqui\"                      },
+    \                     \"posicao\":{                           \"x\":-150.0,                         \"y\":-80.0
+    \                     },                      \"dimensoes\":{                           \"x\":300.0,
+    \                        \"y\":160.0                      },                      \"cor\":\"\",
+    \                     \"fonte\":\"\",                      \"duracao\":0.0,                      \"inicio\":0.0,
+    \                     \"fim\":0.0,                      \"loop\":false                   }
+    \               ]             }          ]       }    ] }"
+  usuario: 

@@ -10,6 +10,7 @@ namespace Entidades
     [Serializable]
     public class Recurso
     {
+		public string _id;
         public TipoRecursoTrecho tipoRecurso;
         public string valor;
 

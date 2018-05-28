@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Security.Cryptography;
@@ -8,7 +9,7 @@ using UnityEngine;
 
 namespace Sincronizacao
 {
-    public class Sincronizador
+    public class Sincronizador : MonoBehaviour
     {
         public static string userName = " ";
         public static string userEmail = " ";
@@ -23,16 +24,28 @@ namespace Sincronizacao
         public static int maxId = -1;
 
         public static List<Historia> historias = new List<Historia>();
-        public static Historias historiasArray { get { return new Historias(historias.ToArray()); } }
+        // public static Historias historiasArray { get { return new Historias(historias.ToArray()); } }
+
         //public static Baloes baloes = new Baloes();
 
 
-        public static Historia buscaOuCriaHistoria()
+        // public static Historia buscaOuCriaHistoria()
+        // {
+        //     carregarHistorias();
+        //     if (historias.Count == 0)
+        //         return new Historia();
+        //     return historias[0];
+        // }
+
+        public static Historia[] minhasHistorias(bool recarregar = true)
         {
-            carregarHistorias();
-            if (historias.Count == 0)
-                return new Historia();
-            return historias[0];
+            if (recarregar || historiasStr == null || historiasStr == "")
+                carregarHistorias();
+
+            return historias.FindAll(delegate (Historia historia)
+            {
+                return historia.autor == Jogo.instancia.usuario;
+            }).ToArray();
         }
 
         public static Historia[] historiasPorCategoria(Categoria categoria, bool recarregar = true)
@@ -43,9 +56,9 @@ namespace Sincronizacao
             if (categoria.tags.Length > 0) ;
             historiasDaCategoria = historiasDaCategoria.FindAll(delegate (Historia historia)
             {
-                return new List<Tag>(categoria.tags).TrueForAll(delegate (Tag tag)
+                return new List<string>(categoria.tags).TrueForAll(delegate (string tag)
                 {
-                    return new List<Tag>(historia.tags).Contains(tag);
+                    return new List<string>(historia.tags).Contains(tag);
                 });
             });
             return historiasDaCategoria.ToArray();
@@ -55,37 +68,54 @@ namespace Sincronizacao
         {
             // if (recarregar || historiasStr == null || historiasStr == "")
             //     carregarHistorias();
-            return historias.Find(historia => historia.getId() == id);
+            return historias.Find(historia => historia.id == id);
         }
 
-        public static void carregarHistorias()
+        public static void buscarNoServidor()
         {
-            historiasStr = PlayerPrefs.GetString("historias");
+            Servidor.instancia.buscarHistorias();
+        }
+
+        public static void carregarHistorias(string histsStr = null)
+        {
+            if (histsStr == null)
+                historiasStr = PlayerPrefs.GetString("historias");
+            else
+                historiasStr = histsStr;
 
             if (historiasStr == null || historiasStr == "")
             {
                 historias = new List<Historia>();
-                historiasStr = JsonUtility.ToJson(historiasArray);
+                historiasStr = JsonUtility.ToJson(historias.ToArray());
                 salvarHistorias();
                 return;
             }
 
             Historias hist = JsonUtility.FromJson<Historias>(historiasStr);
+            if (hist.historias == null)
+                hist.historias = new Historia[0];
             historias = new List<Historia>(hist.historias);
         }
 
-        public static void salvarHistorias()
+        public static void salvarHistorias(bool online = true, string histsStr = null)
         {
-            historiasStr = JsonUtility.ToJson(historiasArray);
+            if (histsStr != null)
+                historiasStr = histsStr;
+            var historiasArray = historias.ToArray();
+            Historias hists = new Historias(historiasArray);
+            historiasStr = JsonUtility.ToJson(hists);
             PlayerPrefs.SetString("historias", historiasStr);
             PlayerPrefs.Save();
+            if (online)
+                Jogo.instancia.salvarHistoriasOnline();
         }
 
         public static void salvarHistoria(Historia historia, bool persistir = false)
         {
-            var historiaGravada = buscarHistoria(historia.getId());
+            var historiaGravada = buscarHistoria(historia.id);
             if (historiaGravada == null)
-                historias.Add(historia);
+                historias.Remove(historiaGravada);
+            historias.Add(historia);
             if (persistir)
                 salvarHistorias();
         }
@@ -123,6 +153,12 @@ namespace Sincronizacao
         {
             var maiorId = getMaiorId();
             return (++maiorId).ToString(); // GetHashString(userName) + GetHashString(userEmail) + ++maxId;
+        }
+
+        public static void salvarHistoriaOnline(Historia historia)
+        {
+            salvarHistoria(historia, true);
+            Servidor.instancia.salvarHistorias(historiasStr);
         }
 
     }

@@ -38,7 +38,8 @@ public class ContadorHistoria : MonoBehaviour
         });
     }
 
-    public void avancar(Trecho trecho){
+    public void avancar(Trecho trecho)
+    {
         var filhos = historia.filhosDoTrecho(trechoAtual);
         int i = filhos.IndexOf(trecho);
         avancar(i);
@@ -89,29 +90,35 @@ public class ContadorHistoria : MonoBehaviour
             var tex = texto.recurso.criaTexto();
 
             // if (texto.fonte == null)
-                tex.font = Resources.GetBuiltinResource<Font>("Arial.ttf");
+            tex.font = Resources.GetBuiltinResource<Font>("Arial.ttf");
             // else
-                // tex.font = Recursos.fontes[texto.fonte];
+            // tex.font = Recursos.fontes[texto.fonte];
 
             var rectTransform = tex.GetComponent<RectTransform>();
 
             tex.transform.SetParent(tela.transform);
-            rectTransform.anchorMin = new Vector2(0.5f, 0.5f);
-            rectTransform.anchorMax = new Vector2(0.5f, 0.5f);
-            rectTransform.pivot = new Vector2(0f, 0f);
+            rectTransform.anchorMin = new Vector2(0, 0);
+            rectTransform.anchorMax = new Vector2(0, 0);
+            rectTransform.pivot = new Vector2(0.5f, 0.5f);
 
             tex.transform.localScale = Vector3.one;
             tex.transform.localPosition = Vector3.zero;
 
-            if (texto.dimensoes != Padroes.DIMENSOES_RECURSO_TEXTO)
-                rectTransform.sizeDelta = texto.dimensoes;
-            else
-                rectTransform.sizeDelta = Padroes.DIMENSOES_RECURSO_TEXTO;
+            var dimX = texto.dimensoes.x;
+            var dimY = texto.dimensoes.y;
 
-            if (texto.posicao != Padroes.POSICAO_RECURSO_TEXTO)
-                rectTransform.transform.localPosition = texto.posicao;
+            var posX = texto.posicao.x;
+            var posY = texto.posicao.y;
+
+            if ((dimX != Padroes.dimTextX && dimX != 0) || (dimY != Padroes.dimTextY && dimY != 0))
+                rectTransform.sizeDelta = new Vector2(dimX, dimY);
             else
-                rectTransform.transform.localPosition = Padroes.POSICAO_RECURSO_TEXTO;
+                rectTransform.sizeDelta = new Vector2(Padroes.dimTextX, Padroes.dimTextY);
+
+            if (posX != Padroes.posTextX || posY != Padroes.posTextY)
+                rectTransform.transform.localPosition = new Vector3(posX, posY, 0);
+            else
+                rectTransform.transform.localPosition = new Vector3(Padroes.posTextX, Padroes.posTextY);
 
             Color cor;
             if (ColorUtility.TryParseHtmlString(texto.cor, out cor))
@@ -124,8 +131,8 @@ public class ContadorHistoria : MonoBehaviour
 
     private void renderizarImagens()
     {
-        var imagens = trechoAtual.getImagens();
-        foreach (var imagem in imagens)
+        List<AplicacaoRecurso> imagens = trechoAtual.getImagens();
+        foreach (AplicacaoRecurso imagem in imagens)
         {
             var img = imagem.recurso.criaImagem();
 
@@ -138,13 +145,13 @@ public class ContadorHistoria : MonoBehaviour
             img.transform.localScale = Vector3.one;
             img.transform.localPosition = Vector3.zero;
 
-            if (imagem.dimensoes != Vector2.zero)
-                rectTransform.sizeDelta = imagem.dimensoes;
+            if (imagem.dimensoes.x != 0 || imagem.dimensoes.y != 0)
+                rectTransform.sizeDelta = new Vector2(imagem.dimensoes.x, imagem.dimensoes.y);
             else
-                rectTransform.sizeDelta = Padroes.DIMENSOES_RECURSO_IMAGEM;
+                rectTransform.sizeDelta = Padroes.DIMENSOES_RECURSO_TEXTO;
 
-            if (imagem.posicao != Vector2.zero)
-                rectTransform.position = imagem.posicao;
+            if (imagem.posicao.x != 0 || imagem.posicao.y != 0)
+                rectTransform.position = new Vector3(imagem.posicao.x, imagem.posicao.y, 0);
             else
                 rectTransform.position = Padroes.POSICAO_RECURSO_IMAGEM;
 

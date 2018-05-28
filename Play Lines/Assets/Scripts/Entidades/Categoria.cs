@@ -9,6 +9,6 @@ namespace Entidades
     public class Categoria
     {
         public string nome;
-        public Tag[] tags;
+        public string[] tags;
     }
 }

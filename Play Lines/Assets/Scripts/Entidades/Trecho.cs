@@ -10,6 +10,7 @@ namespace Entidades
     [Serializable]
     public class Trecho
     {
+        public string id;
         public int ordem;
         public string textoCondicao;
         public TipoTrecho tipoTrecho;
@@ -121,10 +122,9 @@ namespace Entidades
             pais = paisLista.ToArray();
         }
 
-
         public List<AplicacaoRecurso> getTextos()
         {
-            var textos = new List<AplicacaoRecurso>();
+            var textos = new List<AplicacaoRecurso>(aplicacoesRecurso);
             foreach (var aplicacao in aplicacoesRecurso)
             {
                 if (aplicacao.recurso.tipoRecurso == TipoRecursoTrecho.TEXTO)

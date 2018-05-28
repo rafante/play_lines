@@ -23,7 +23,7 @@ namespace Renderizacao
         public Text ordem;
         public InputField condicao;
         public Image borda;
-        public bool dragging;
+        public bool arrastando;
         public int balaoId { get { return trecho.ordem; } }
         public List<int> pais { get { return new List<int>(trecho.pais); } }
 
@@ -56,6 +56,7 @@ namespace Renderizacao
         /// <param name="dadosDoEvento">Este parâmetro traz informações do toque ou clique do mouse</param>
         public void OnDrag(PointerEventData dadosDoEvento)
         {
+            arrastando = true;
             ControladorCamera.ativo = false;
             var dadosDoPonteiro = dadosDoEvento;
             if (dadosDoPonteiro == null)
@@ -100,6 +101,7 @@ namespace Renderizacao
 
         public void OnEndDrag(PointerEventData eventData)
         {
+            arrastando = false;
             ControladorCamera.ativo = true;
         }
 

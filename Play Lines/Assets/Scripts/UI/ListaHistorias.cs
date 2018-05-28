@@ -1,6 +1,7 @@
 ﻿using Entidades;
 using Sincronizacao;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace UI
 {
@@ -11,6 +12,8 @@ namespace UI
         public Historia[] historias;
         public ItemHistoria itemHistoriaPrefab;
         public GameObject container;
+        public TipoListaHistorias tipoLista;
+        public Text tituloLista;
 
         /// <summary>
         /// Start is called on the frame when a script is enabled just before
@@ -23,7 +26,11 @@ namespace UI
 
         public void carregar()
         {
-            historias = Sincronizador.historiasPorCategoria(categoria);
+            if (tipoLista == TipoListaHistorias.CATEGORIA)
+                historias = Sincronizador.historiasPorCategoria(categoria);
+            else
+                historias = Sincronizador.minhasHistorias();
+            tituloLista.text = categoria.nome;
             foreach (Transform t in container.transform)
             {
                 Destroy(t.gameObject);
@@ -38,4 +45,8 @@ namespace UI
             }
         }
     }
+}
+public enum TipoListaHistorias
+{
+    CATEGORIA, MINHAS
 }

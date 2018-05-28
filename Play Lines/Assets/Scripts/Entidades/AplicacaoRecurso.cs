@@ -10,9 +10,10 @@ namespace Entidades
     [Serializable]
     public class AplicacaoRecurso
     {
+        public string id;
         public Recurso recurso;
-        public Vector2 posicao;
-        public Vector2 dimensoes;
+		public Vector2 posicao;
+		public Vector2 dimensoes;
         public string cor;
         public string fonte;
         public float duracao;
@@ -30,9 +31,9 @@ namespace Entidades
         {
             switch (tipo)
             {
-                case TipoRecursoTrecho.TEXTO:
-                    posicao = Padroes.POSICAO_RECURSO_TEXTO;
-                    dimensoes = Padroes.DIMENSOES_RECURSO_TEXTO;
+			case TipoRecursoTrecho.TEXTO:
+				posicao = Padroes.POSICAO_RECURSO_TEXTO;
+				dimensoes = Padroes.DIMENSOES_RECURSO_TEXTO;
                     duracao = 0;
                     inicio = 0;
                     fim = 0;

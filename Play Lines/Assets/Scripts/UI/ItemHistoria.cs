@@ -25,11 +25,18 @@ namespace UI
 
         public void carregarFuncaoBotao()
         {
+            var acao = "";
+            var lista = gameObject.GetComponentInParent<ListaHistorias>();
+            if (lista.tipoLista == TipoListaHistorias.CATEGORIA)
+                acao = "jogar";
+            else
+                acao = "layout_historia";
             Button botao = gameObject.GetComponent<Button>();
-            ComposicaoHistoria.historia = historia;
+
             botao.onClick.AddListener(delegate ()
             {
-                SceneManager.LoadScene("jogar");
+                ComposicaoHistoria.historia = historia;
+                SceneManager.LoadScene(acao);
             });
         }
 
@@ -41,7 +48,7 @@ namespace UI
 
         public void atualizaUI()
         {
-            if (historia.thumbnail != null && historia.thumbnail != "")
+            if (historia.thumbnail != null && historia.thumbnail != "" && Recursos.imagens.ContainsKey(historia.thumbnail))
                 thumbnail.sprite = Recursos.imagens[historia.thumbnail];
             nome.text = historia.nome;
             descricao.text = historia.descricao;

@@ -75,6 +75,7 @@
      <Compile Include="Assets\Scripts\Entidades\Historias.cs" />
      <Compile Include="Assets\Scripts\Entidades\Idioma.cs" />
      <Compile Include="Assets\Scripts\Entidades\RecursoTrecho.cs" />
+     <Compile Include="Assets\Scripts\Entidades\RepresentacaoRecurso.cs" />
      <Compile Include="Assets\Scripts\Entidades\Tag.cs" />
      <Compile Include="Assets\Scripts\Entidades\Trecho.cs" />
      <Compile Include="Assets\Scripts\Enums\ClassificacaoEtaria.cs" />
@@ -91,11 +92,14 @@
      <Compile Include="Assets\Scripts\Sincronizacao\Baloes.cs" />
      <Compile Include="Assets\Scripts\Sincronizacao\Conexao.cs" />
      <Compile Include="Assets\Scripts\Sincronizacao\Diagrama.cs" />
+     <Compile Include="Assets\Scripts\Sincronizacao\Servidor.cs" />
      <Compile Include="Assets\Scripts\Sincronizacao\Sincronizador.cs" />
      <Compile Include="Assets\Scripts\Sincronizacao\Trechos.cs" />
      <Compile Include="Assets\Scripts\Testes\HistoriasExemplo.cs" />
      <Compile Include="Assets\Scripts\UI\ItemHistoria.cs" />
      <Compile Include="Assets\Scripts\UI\ListaHistorias.cs" />
+     <Compile Include="Assets\Scripts\UI\TelaPrincipal.cs" />
+     <Compile Include="Assets\Scripts\Uteis\Jogo.cs" />
      <Compile Include="Assets\Scripts\Uteis\TipoConexao.cs" />
      <Compile Include="Assets\Simple Vector Icons\Sample\IconPreview.cs" />
      <Compile Include="Assets\UIGraph\Scripts\Connection.cs" />

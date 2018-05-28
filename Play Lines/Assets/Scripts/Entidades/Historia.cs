@@ -14,15 +14,11 @@ namespace Entidades
         public string descricao;
         public string thumbnail;
         public string autor;
+        public string id;
         public Classificacao classificacao;
-        public Tag[] tags;
-        public Idioma[] idiomas = new Idioma[0];
+        public string[] tags;
+        public string[] idiomas = new string[0];
         public Trecho[] trechos = new Trecho[0];
-
-        public string getId()
-        {
-            return nome + ":" + autor;
-        }
 
         public List<Trecho> filhosDoTrecho(Trecho trecho){
             List<Trecho> filhos = new List<Trecho>();
